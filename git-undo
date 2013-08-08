@@ -1,0 +1,6 @@
+#!/bin/bash
+
+git log -1 --pretty=%B > ~/.git-undo_msg
+echo "Undo commit '$(cat ~/.git-undo_msg)'"
+echo ""
+git reset HEAD~1
