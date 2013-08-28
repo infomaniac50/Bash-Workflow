@@ -1,0 +1,118 @@
+#!/bin/bash
+
+function usage()
+{
+    echo ""
+    echo "Show status for all git repositories in the current directory."
+    echo ""
+    echo "Usage: git modified [--version|-v] [--help|-h] <command> <[args]>"
+
+    echo ""
+    echo "Commands are:"
+    echo "list     List dirty and/or clean working directories"
+    echo "status   Show status for all working directories"
+
+    echo ""
+    echo "git modified list <[args]>"
+    echo ""
+    echo "Arguments:"
+    echo "         -c | --clean-only"
+    echo "         -d | --dirty-only"
+}
+
+function program_head() {
+    echo "#########################################"
+}    
+
+function version() {
+    program_head
+
+    echo "# Author: Derek Chafin                  #"
+    echo "# August 28, 2013                       #"
+    echo "# Github: @infomaniac50                 #"
+    echo "# CC-BY-SA Creative Commons Share Alike #"
+
+  # echo "#########################################"
+    program_head
+}
+
+function status() {
+    for DIR in $(ls -1dc -- */)
+    do
+        cd "$DIR"
+
+        # Make sure current directory is a git repo
+        if [[ -d ".git" ]]; then
+            GITSTATUS="$(git status)"
+            if [ ! $(echo -n $GITSTATUS | grep -q 'nothing to commit') ]
+            then
+                echo "$DIR"
+                echo "$GITSTATUS"
+                echo ""
+            fi            
+        fi
+
+        cd ..
+    done
+}
+
+function list() {
+    FILTER="$1"
+    ZERO=0
+
+    case "$FILTER" in
+        -d | --dirty-only )
+            DO=1
+            CO=0
+            ;;
+        -c | --clean-only )
+            DO=0
+            CO=1
+            ;;
+        *)
+            DO=1
+            CO=1
+            ;;
+    esac
+
+
+    for DIR in $(ls -1dc -- */)
+    do
+        cd "$DIR"
+
+        # Make sure current directory is a git repo
+        if [[ -d ".git" ]]; then
+            if $(git status | grep -q 'nothing to commit')
+            then
+                if [[ ! $CO -eq $ZERO ]]; then
+                    echo "$DIR is clean"
+                fi
+            else
+                if [[ ! $DO -eq $ZERO ]]; then
+                    echo "$DIR is dirty"
+                fi
+            fi
+        fi
+
+        cd ..
+    done
+}
+
+ACTION="$1"
+
+shift
+
+case "$ACTION" in
+    status)
+        status $@
+        ;;
+    list)
+        list $@
+        ;;
+    -v | --version)
+        version $@
+        ;;
+    -h | --help | *)
+        usage $@
+        ;;
+esac
