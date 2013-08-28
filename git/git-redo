@@ -1,11 +1,9 @@
 #!/bin/bash
 
-if [[ -f ~/.git-undo_msg ]]; then
-
-  git commit -m "$(cat ~/.git-undo_msg)"
+if [[ -f "${HOME}/.git-undo_msg" ]]; then
+  git commit -m "$(cat ${HOME}/.git-undo_msg)"
   
-  rm ~/.git-undo_msg
+  rm "${HOME}/.git-undo_msg"
 else
-
   echo "No undo found"
 fi
