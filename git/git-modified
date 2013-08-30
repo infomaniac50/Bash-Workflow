@@ -102,6 +102,9 @@ ACTION="$1"
 
 shift
 
+SAVEIFS=$IFS
+IFS=$(echo -en "\n\b")
+
 case "$ACTION" in
     status)
         status $@
@@ -116,3 +119,5 @@ case "$ACTION" in
         usage $@
         ;;
 esac
+
+IFS=$SAVEIFS
