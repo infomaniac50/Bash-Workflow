@@ -1,5 +1,7 @@
 #!/bin/bash
 
+GITSTATUSTMP='/tmp/git.status'
+
 function usage()
 {
     echo ""
@@ -43,7 +45,8 @@ function status() {
 
         # Make sure current directory is a git repo
         if [[ -d ".git" ]]; then
-            GITSTATUS="$(git status)"
+            # GITSTATUS="$(git status)"
+            git status > $GITSTATUSTMP
             if [ ! $(echo -n $GITSTATUS | grep -q 'nothing to commit') ]
             then
                 echo "$DIR"
@@ -82,10 +85,16 @@ function list() {
 
         # Make sure current directory is a git repo
         if [[ -d ".git" ]]; then
-            if $(git status | grep -q 'nothing to commit')
+            git status > $GITSTATUSTMP
+
+            if $(cat $GITSTATUSTMP | grep -q 'nothing to commit')
             then
                 if [[ ! $CO -eq $ZERO ]]; then
                     echo "$DIR is clean"
+                    if $(cat $GITSTATUSTMP | grep -qe 'ahead|push')
+                    then
+                        echo "Warning: $DIR has un-pushed commits."
+                    fi
                 fi
             else
                 if [[ ! $DO -eq $ZERO ]]; then
@@ -119,5 +128,7 @@ case "$ACTION" in
         usage $@
         ;;
 esac
+
+
 
 IFS=$SAVEIFS
