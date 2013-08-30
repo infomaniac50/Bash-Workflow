@@ -45,14 +45,10 @@ function status() {
 
         # Make sure current directory is a git repo
         if [[ -d ".git" ]]; then
-            # GITSTATUS="$(git status)"
             git status > $GITSTATUSTMP
-            if [ ! $(echo -n $GITSTATUS | grep -q 'nothing to commit') ]
-            then
-                echo "$DIR"
-                echo "$GITSTATUS"
-                echo ""
-            fi            
+            echo ""
+            echo "$DIR"
+            cat $GITSTATUSTMP
         fi
 
         cd ..
@@ -87,13 +83,16 @@ function list() {
         if [[ -d ".git" ]]; then
             git status > $GITSTATUSTMP
 
+            echo ""
+            
             if $(cat $GITSTATUSTMP | grep -q 'nothing to commit')
             then
                 if [[ ! $CO -eq $ZERO ]]; then
                     echo "$DIR is clean"
-                    if $(cat $GITSTATUSTMP | grep -qe 'ahead|push')
+                    if $(cat $GITSTATUSTMP | egrep -q 'ahead|push')
                     then
-                        echo "Warning: $DIR has un-pushed commits."
+                        echo -en '\E[31;40m'"Warning: $DIR has un-pushed commits."
+                        echo -e '\E[0m'
                     fi
                 fi
             else
@@ -128,7 +127,5 @@ case "$ACTION" in
         usage $@
         ;;
 esac
-
-
 
 IFS=$SAVEIFS
