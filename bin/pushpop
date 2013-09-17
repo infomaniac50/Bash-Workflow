@@ -1,0 +1,106 @@
+#!/bin/env node
+
+var fs = require('fs');
+var os = require('os');
+var path = require('path');
+
+var args = process.argv;
+
+var action = args[2];
+
+var value = args[3];
+
+var stack = [];
+
+var tmpfile = path.join(os.tmpdir(), 'bash_stack.json');
+
+var doHelp = function () {
+    console.log("");
+    console.log("PushPop by Derek Chafin");
+    console.log("An arbitrary string stack for your shell.");
+    console.log("");
+    console.log("Usage: pushpop <push|pop|peek|clean> [<value>]");
+    console.log("");
+    console.log("  Push:\t\tpushpop push <value>");
+    console.log("  Pop:\t\tpushpop pop");
+    console.log("  Peek:\t\tpushpop peek");
+    console.log("  Clean:\tpushpop clean");
+};
+
+var writeStack = function() {
+    var jstack = JSON.stringify(stack);
+    fs.writeFileSync(tmpfile, jstack, 'utf8');
+
+    // console.log(jstack);
+};
+
+var readStack = function () {
+    var jstack = fs.readFileSync(tmpfile, 'utf8');
+
+    // console.log(jstack);
+
+    stack = JSON.parse(jstack);
+};
+
+var doClean = function (exists) {
+    fs.unlink(tmpfile, function(err) {
+        if (err) throw err;
+    });
+
+    stack = [];
+};
+
+var doPush = function () {
+    stack.push(value);
+};
+
+var doPop = function () {
+    value = stack.pop();
+
+    console.log(value);
+};
+
+var doPeek = function () {
+    doPop();
+    doPush();
+};
+
+var doStack = function (exists) {
+    if (action != 'clean' && exists) {
+        readStack();
+    }
+
+    switch(action)
+    {
+        case "push":
+            doPush();
+            break;
+        case "pop":
+            doPop();
+            break;
+        case "peek":
+            doPeek();
+            break;
+        case "clean":
+            doClean();
+            break;
+        default:
+            doHelp();
+            break;
+    }
+
+    if (action == 'push' || action == 'pop')
+    {
+        writeStack();
+    }
+};
+
+if (action == 'debug') {
+    console.log(tmpfile);
+    console.log(action);
+    console.log(value);
+}
+else
+{
+    fs.exists(tmpfile, doStack);
+}
