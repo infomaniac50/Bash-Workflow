@@ -1,5 +1,6 @@
-if [[ -f ${HOME}/.bash_path ]]
-then
+PATHFILE=${HOME}/.bash_path
+
+if [[ -f $PATHFILE ]]; then
     while read DIR
     do
         DIR=$(eval echo $DIR)
@@ -7,5 +8,5 @@ then
         then
             PATH=$DIR:$PATH
         fi
-    done
+    done < $PATHFILE
 fi
