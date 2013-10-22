@@ -1,29 +1,38 @@
 # If we are not in our home directory cd to it.
-if [[ "$(pwd)" != "${HOME}" ]]
-then 
+if [[ "$(pwd)" != "${HOME}" ]]; then 
     cd "${HOME}"
 fi
 
-# Use new lines as argument separators
-SAVEIFS=$IFS
-IFS=$(echo -en "\n\b")
+function try_source_path()
+{
+    RELPATH="$1"
+    EXTENSION="$2"
 
-# Load our bashrc modules if they exist
-if [[ -d ${HOME}/bashrc ]]
-then
-    echo "Loading BASHRC Modules"
-    echo ""
+    MODULE_PATH="${HOME}/${RELPATH}"
 
-    for BASHRC in $(ls -1 ${HOME}/bashrc/)
-    do
-        MODULE="${HOME}/bashrc/$BASHRC"
-        echo "$BASHRC"
-        source $MODULE
-    done
-fi
+    # Load our bashrc modules if they exist
+    if [[ -d "$MODULE_PATH" ]]; then
+        ls -1 $MODULE_PATH/*.$EXTENSION > /tmp/bashmod.tmp
 
-# Restore old argument separator
-IFS=$SAVEIFS
+        while read MODULE
+        do
+            MODULE_NAME=${MODULE##*/}
+            MODULE_NAME=${MODULE_NAME%.*}
+            echo -n "$MODULE_NAME: "
+            source $MODULE
+        done < /tmp/bashmod.tmp
+
+        rm -f /tmp/bashmod.tmp
+    fi
+}
+
+echo ""
+echo "Loading Bash Modules"
+try_source_path "bashrc" "bashrc"
+
+echo ""
+echo "Loading Bash Functions"
+try_source_path "functions" "func"
 
 # Let the new shell use our PATH
 export PATH
