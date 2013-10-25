@@ -1,11 +1,12 @@
-if [[ -f ${HOME}/.bash_path ]]
-then
-    for DIR in $(cat ${HOME}/.bash_path)
+PATHFILE=${HOME}/.bash_path
+
+if [[ -f $PATHFILE ]]; then
+    while read DIR
     do
-        DIR="${DIR/#~/${HOME}}"
+        DIR=$(eval echo $DIR)
         if [[ -d $DIR ]]
         then
             PATH=$DIR:$PATH
         fi
-    done
+    done < $PATHFILE
 fi

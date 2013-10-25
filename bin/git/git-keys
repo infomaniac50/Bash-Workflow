@@ -1,0 +1,16 @@
+#!/bin/bash
+
+GITKEYS=${HOME}/.gitkeys
+
+echo "Using $GITKEYS"
+
+if [[ -f $GITKEYS ]]; then
+	while read line; do
+		KEY=$(eval echo $line)
+		echo $KEY
+		if [[ -f $KEY ]]; then
+			echo "Loading $KEY"
+			ssh-add $KEY
+		fi
+	done < $GITKEYS;
+fi
