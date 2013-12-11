@@ -34,5 +34,6 @@ echo ""
 echo "Loading Bash Functions"
 try_source_path "functions" "func"
 
+echo ""
 # Let the new shell use our PATH
 export PATH
