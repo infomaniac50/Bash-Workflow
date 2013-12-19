@@ -17,3 +17,6 @@ alias ping='ping -c 5'
 alias fastping='ping -c 100 -i .2'
 
 alias ports='netstat -tulanp'
+
+alias zlist='tar --list -zf'
+alias lsdir='ls -d */'
