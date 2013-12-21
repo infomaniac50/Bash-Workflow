@@ -1,0 +1,43 @@
+#!/bin/bash
+PYTHON_BIN=`which python`
+DROPBOX_PY="${HOME}/bin/dropbox.py"
+
+function update()
+{
+  echo "Updating Dropbox..."
+
+  cd ~ && wget -O - "https://www.dropbox.com/download?plat=lnx.x86_64" | tar xzf -
+
+  echo "Done"
+}
+
+function update_stop()
+{
+  if [[ -f $DROPBOX_PY ]]; then
+    $PYTHON_BIN $DROPBOX_PY stop
+  fi
+}
+
+function update_start()
+{
+  if [[ -f $DROPBOX_PY ]]; then
+    $PYTHON_BIN $DROPBOX_PY start
+  fi
+}
+
+ACTION="$1"
+
+case "$ACTION" in
+  'update')
+    update_stop
+    update
+    update_start
+    ;;
+  *)
+  if [[ -f $DROPBOX_PY ]]; then
+    $PYTHON_BIN $DROPBOX_PY $@
+  else
+    echo "dropbox.py not found in users bin folder."
+  fi
+  ;;
+esac
