@@ -1,0 +1,25 @@
+#!/bin/bash
+
+case $1 in
+'-n')
+  shift
+  OUT=/dev/null
+  ERR=/dev/null
+  ;;
+'-r')
+  shift
+  OUT="$1"
+  ERR="$2"
+  shift
+  shift
+  ;;
+*)
+  OUT='pwait.out'
+  ERR='pwait.err'
+  ;;
+esac
+
+$@ < /dev/stdin > $OUT 2> $ERR &
+PID=$!
+wait $PID;
+beep;
