@@ -19,6 +19,7 @@ case $1 in
 '-h')
   usage;
   exit;
+  ;;
 '-n')
   shift
   OUT=/dev/null
