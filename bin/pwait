@@ -1,6 +1,24 @@
 #!/bin/bash
 
+function usage()
+{
+  echo "pwait - Wait for a subcommand to finish and then beep"
+  echo "Useful for notifying the user when a long running process has been completed."
+  echo ""
+  echo "Usage: pwait <[options]> [command] <[command args]>"
+  echo "Options:"
+  echo "-h: This help"
+  echo "-n: Redirect stderr and stdout to /dev/null"
+  echo "-r: Redirect stderr and stdout to the files of your choosing."
+  echo "  -r [stdout] [stderr]"
+  echo "An empty options argument will redirect stdout and stderr to pwait.out and pwait.err, respectively."
+  echo "The files pwait.out and pwait.err will reside in the current working directory after completion."
+}
+
 case $1 in
+'-h')
+  usage;
+  exit;
 '-n')
   shift
   OUT=/dev/null
