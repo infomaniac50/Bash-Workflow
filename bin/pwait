@@ -2,7 +2,7 @@
 
 function usage()
 {
-  echo 'pwait - Runs a subcommand in the background and beeps when done.'
+  echo 'pwait - Runs a subcommand and beeps when done.'
   echo '  Useful for notifying the user when a long running process has been completed.'
   echo ''
   echo 'Usage: pwait <[options]> [command] <[command args]>'
@@ -16,6 +16,7 @@ function usage()
   echo '  pwait dostuff --arg1 --arg2 -a'
   echo '  pwait -n dostuff --arg1 --arg2 -a'
   echo '  pwait -r /tmp/dostuff.out /tmp/dostuff.err dostuff --arg1 --arg2 -a'
+  echo '  pwait dobackground --arg1 --arg2 -a &'
   echo ''
 }
 
@@ -45,4 +46,4 @@ esac
 $@ < /dev/stdin > $OUT 2> $ERR &
 PID=$!
 wait $PID;
-beep;
+command -v beep >/dev/null 2>&1 && beep || { echo -en "Aw... No beep found. You may need to install it.\nBEEP!\a\n"; }
