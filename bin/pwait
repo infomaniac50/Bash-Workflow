@@ -2,17 +2,21 @@
 
 function usage()
 {
-  echo "pwait - Wait for a subcommand to finish and then beep"
-  echo "Useful for notifying the user when a long running process has been completed."
-  echo ""
-  echo "Usage: pwait <[options]> [command] <[command args]>"
-  echo "Options:"
-  echo "-h: This help"
-  echo "-n: Redirect stderr and stdout to /dev/null"
-  echo "-r: Redirect stderr and stdout to the files of your choosing."
-  echo "  -r [stdout] [stderr]"
-  echo "An empty options argument will redirect stdout and stderr to pwait.out and pwait.err, respectively."
-  echo "The files pwait.out and pwait.err will reside in the current working directory after completion."
+  echo 'pwait - Runs a subcommand in the background and beeps when done.'
+  echo '  Useful for notifying the user when a long running process has been completed.'
+  echo ''
+  echo 'Usage: pwait <[options]> [command] <[command args]>'
+  echo 'Options:'
+  echo '  -h: This help'
+  echo '  -n: Redirect stdout and stderr to /dev/null'
+  echo '  -r: Redirect stdout and stderr to the files of your choosing.'
+  echo '   *: Redirect stdout and stderr to ./pwait.out and ./pwait.err'
+  echo ''
+  echo 'Example:'
+  echo '  pwait dostuff --arg1 --arg2 -a'
+  echo '  pwait -n dostuff --arg1 --arg2 -a'
+  echo '  pwait -r /tmp/dostuff.out /tmp/dostuff.err dostuff --arg1 --arg2 -a'
+  echo ''
 }
 
 case $1 in
