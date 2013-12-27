@@ -1,10 +1,13 @@
 #!/bin/bash
 
-chmod u+x bin/*
-
 cp -R bashrc/ ~/
 cp -R functions/ ~/
 cp -R bin/ ~/
+
+while read line
+do
+    chmod u+x "${HOME}/bin/$line"
+done < <(ls bin/)
 
 cp .bash_path ~/
 cp .bash_path.opt ~/
