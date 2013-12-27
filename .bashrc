@@ -1,3 +1,7 @@
+
+# Exit if Filezilla connects we don't want to freak it out.
+[ $TERM == 'dumb' ] && return
+
 # If we are not in our home directory cd to it.
 if [[ "$(pwd)" != "${HOME}" ]]; then 
     cd "${HOME}"
