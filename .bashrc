@@ -1,6 +1,8 @@
 
 # Exit if Filezilla connects we don't want to freak it out.
 [ $TERM == 'dumb' ] && return
+# If this variable is set just return
+if [[ -n $WORKFLOW ]]; then return; fi;
 
 # If we are not in our home directory cd to it.
 if [[ "$(pwd)" != "${HOME}" ]]; then 
@@ -39,5 +41,10 @@ echo "Loading Bash Functions"
 try_source_path "functions" "func"
 
 echo ""
+
+# Set a variable so we dont run this again.
+WORKFLOW="1"
+export WORKFLOW
+
 # Let the new shell use our PATH
 export PATH
