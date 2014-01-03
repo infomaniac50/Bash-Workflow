@@ -1,5 +1,15 @@
 #!/bin/bash
 
+function cp_rename()
+{
+    if [[ ! -f $1 ]]; then
+        cp $1 $2/$1
+    else
+        cp $1 $2/$1.new
+        echo $1 exists copying as $1.new
+    fi
+}
+
 cp -R bashrc/ ~/
 cp -R functions/ ~/
 cp -R bin/ ~/
@@ -13,7 +23,7 @@ else
     done < <(ls bin/)
 fi
 
-[ ! -f ~/.bash_path ] && cp .bash_path ~/
-[ ! -f ~/.bash_path ] && cp .bash_path.opt ~/
-cp .bashrc ~/
-cp .bash_profile ~/
+cp_rename .bash_path ~
+cp_rename .bash_path.opt ~
+cp_rename .bashrc ~
+cp_rename .bash_profile ~
