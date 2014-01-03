@@ -6,7 +6,7 @@ if [[ -f $PATHFILE ]]; then
         DIR=$(eval echo $DIR)
         if [[ -d $DIR ]]
         then
-            PATH=$DIR:$PATH
+            PATH=$PATH:$DIR
         fi
     done < $PATHFILE
 fi
