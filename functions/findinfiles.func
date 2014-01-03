@@ -1,0 +1,4 @@
+
+function findinfiles() {
+  find . -type f -iname "$1" -exec grep -l "$2" '{}' \;
+}
