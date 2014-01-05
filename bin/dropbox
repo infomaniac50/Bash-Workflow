@@ -1,43 +1,46 @@
 #!/bin/bash
-PYTHON_BIN=`which python`
+PYTHON_BIN=`which python2`
 DROPBOX_PY="${HOME}/bin/dropbox.py"
 
 function update()
 {
+  WAS_RUNNING=$(dropbox running && echo "no" || echo "yes")
+
+  if [[ $WAS_RUNNING == "yes" ]]; then
+    dropbox stop
+  fi
+
   echo "Updating Dropbox..."
 
-  cd ~ && wget -O - "https://www.dropbox.com/download?plat=lnx.x86_64" | tar xzf -
+  ARCH=`uname -m`
+  [ $ARCH == 'i686' ] && ARCH='x86'
+
+  cd ~ && curl -L "https://www.dropbox.com/download?plat=lnx.$ARCH" | tar xzf -
+
+  if [[ $WAS_RUNNING == "yes" ]]; then
+    dropbox start
+  fi
 
   echo "Done"
-}
-
-function update_stop()
-{
-  if [[ -f $DROPBOX_PY ]]; then
-    $PYTHON_BIN $DROPBOX_PY stop
-  fi
-}
-
-function update_start()
-{
-  if [[ -f $DROPBOX_PY ]]; then
-    $PYTHON_BIN $DROPBOX_PY start
-  fi
 }
 
 ACTION="$1"
 
 case "$ACTION" in
   'update')
-    update_stop
     update
-    update_start
-    ;;
+  ;;
   *)
-  if [[ -f $DROPBOX_PY ]]; then
-    $PYTHON_BIN $DROPBOX_PY $@
-  else
-    echo "dropbox.py not found in users bin folder."
-  fi
+    if [[ -f $DROPBOX_PY ]]; then
+      $PYTHON_BIN $DROPBOX_PY $@
+      exit $?
+    else
+      echo -n "dropbox.py not found. Do you want me to fetch it? [yes|no] "
+      read ANSWER
+      if [[ $ANSWER == 'yes' || $ANSWER == 'y' ]]; then
+        curl -LSs 'https://www.dropbox.com/download?dl=packages/dropbox.py' > $DROPBOX_PY
+        echo "Done"
+      fi
+    fi
   ;;
 esac
