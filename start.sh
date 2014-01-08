@@ -2,7 +2,7 @@
 
 function cp_rename()
 {
-    if [[ ! -f $1 ]]; then
+    if [[ ! -f $2/$1 ]]; then
         cp $1 $2/$1
     else
         cp $1 $2/$1.new
