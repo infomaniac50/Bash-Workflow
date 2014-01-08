@@ -25,5 +25,4 @@ fi
 
 cp_rename .bash_path ~
 cp_rename .bash_path.opt ~
-cp_rename .bashrc ~
-cp_rename .bash_profile ~
+cp_rename bashwf ~
