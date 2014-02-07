@@ -23,6 +23,16 @@ else
     done < <(ls bin/)
 fi
 
+
 cp_rename .bash_path ~
 cp_rename .bash_path.opt ~
 cp_rename bashwf ~
+
+echo "
+Use can use this function to quickly load bash workflow.
+Just insert it into your .profile/.bashrc/shell specific init file you use.
+function wf()
+{
+  source ~/bashwf
+}
+"

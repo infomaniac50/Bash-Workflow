@@ -1,5 +1,5 @@
 # If we are not in our home directory cd to it.
-if [[ "$(pwd)" != "${HOME}" ]]; then 
+if [[ "$(pwd)" != "${HOME}" ]]; then
     cd "${HOME}"
 fi
 
