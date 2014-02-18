@@ -1,0 +1,16 @@
+#!/bin/bash
+
+
+if [[ -n `which vboxmanage ` ]]; then
+
+function vmm_uuid()
+{
+	VM=$(vboxmanage list vms | grep "$1")
+	if [[ -z $VM ]]; then echo "VM not found." && return 1; fi;
+
+	echo $VM | cut -d ' ' -f 3 | tr -d '{}'
+}
+
+else
+	echo "No vboxmanage found";
+fi
