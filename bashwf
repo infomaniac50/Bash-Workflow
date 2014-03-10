@@ -5,8 +5,6 @@ fi
 
 color_prompt=no
 
-echo "$TERM"
-
 case "$TERM" in
     cygwin) color_prompt=yes;;
     xterm-color) color_prompt=yes;;
