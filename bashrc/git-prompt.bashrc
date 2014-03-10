@@ -1,7 +1,18 @@
-#. ${HOME}/.git-prompt
 
-#if [ "$color_prompt" = yes ]; then
-#    PS1='${debian_chroot:+($debian_chroot)}\[\033[01;32m\]\u@\h\[\033[00m\]:\[\033[01;34m\]\w\[\033[00m\]$(__git_ps1 "($s)")\$ '
-#else
-#    PS1='${debian_chroot:+($debian_chroot)}\u@\h:\w$(__git_ps1 " (%s)")\$ '
-#fi
+if [[ -n `which git` ]]; then
+    function parse_git_branch {
+        git branch --no-color 2> /dev/null | sed -e '/^[^*]/d' -e 's/* \(.*\)/(\1)/' 
+    }
+
+    if [ "$color_prompt" = yes ]; then
+        PS1='\n\[\033[01;32m\]\u@\h \[\033[01;33m\]\W $(parse_git_branch)\[\033[0m\]\n$ '
+    else
+        PS1='\n\u@\h \W $(parse_git_branch)\n\$ '
+    fi
+else
+    if [ "$color_prompt" = yes ]; then
+        PS1='\n\[\033[01;32m\]\u@\h \[\033[01;33m\]\W \[\033[0m\]\n$ '
+    else
+        PS1='\n\u@\h \W \n\$ '
+    fi
+fi

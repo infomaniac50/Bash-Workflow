@@ -3,6 +3,15 @@ if [[ "$(pwd)" != "${HOME}" ]]; then
     cd "${HOME}"
 fi
 
+color_prompt=no
+
+echo "$TERM"
+
+case "$TERM" in
+    cygwin) color_prompt=yes;;
+    xterm-color) color_prompt=yes;;
+esac
+
 function try_source_path()
 {
     RELPATH="$1"
@@ -35,6 +44,8 @@ echo "Loading Bash Functions"
 try_source_path "functions" "func"
 
 echo ""
+
+unset color_prompt;
 
 # Let the new shell use our PATH
 export PATH
