@@ -1,6 +1,6 @@
 
 if [ -n "$force_color_prompt" ]; then
-    color_prompt = yes
+    color_prompt=yes
     unset force_color_prompt;
 fi
 
