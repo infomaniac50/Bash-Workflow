@@ -1,7 +1,7 @@
 #!/bin/bash
 
 
-if [[ -n `which vboxmanage ` ]]; then
+if command_exists vboxmanage; then
 
 function vmm_uuid()
 {

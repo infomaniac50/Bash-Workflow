@@ -1,3 +1,5 @@
+
+
 # If we are not in our home directory cd to it.
 if [[ "$(pwd)" != "${HOME}" ]]; then
     cd "${HOME}"
@@ -9,6 +11,12 @@ case "$TERM" in
     cygwin) color_prompt=yes;;
     xterm-color) color_prompt=yes;;
 esac
+
+function command_exists()
+{
+    hash "$1" 2>/dev/null
+    return $?
+}
 
 function try_source_path()
 {
