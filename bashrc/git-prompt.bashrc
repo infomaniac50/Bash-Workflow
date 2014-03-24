@@ -4,7 +4,7 @@ if [ -n "$force_color_prompt" ]; then
     unset force_color_prompt;
 fi
 
-if [[ -n `which git` ]]; then
+if command_exists "git"; then
     function parse_git_branch {
         git branch --no-color 2> /dev/null | sed -e '/^[^*]/d' -e 's/* \(.*\)/(\1)/' 
     }
