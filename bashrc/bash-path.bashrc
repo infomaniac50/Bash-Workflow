@@ -1,4 +1,4 @@
-PATHFILE=${HOME}/.bash_path
+PATHFILE=$BASHWF/.bash_path
 
 if [[ -f $PATHFILE ]]; then
     while read DIR

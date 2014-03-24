@@ -1,5 +1,6 @@
 #!/bin/bash
 
+BASHWF="${HOME}/bashwf"
 
 # If we are not in our home directory cd to it.
 if [[ "$(pwd)" != "${HOME}" ]]; then
@@ -24,7 +25,7 @@ function try_source_path()
     RELPATH="$1"
     EXTENSION="$2"
 
-    MODULE_PATH="${HOME}/${RELPATH}"
+    MODULE_PATH="$BASHWF/${RELPATH}"
 
     # Load our bashrc modules if they exist
     if [[ -d "$MODULE_PATH" ]]; then

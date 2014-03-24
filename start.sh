@@ -1,5 +1,7 @@
 #!/bin/bash
 
+BASHWF="${HOME}/bashwf"
+
 echo ""
 
 function cp_rename()
@@ -12,9 +14,13 @@ function cp_rename()
     fi
 }
 
-cp -R bashrc/ ~/
-cp -R functions/ ~/
-cp -R bin/ ~/
+if [[ ! -d $BASHWF ]]; then
+    mkdir $BASHWF
+fi
+
+cp -R bashrc/ $BASHWF/
+cp -R functions/ $BASHWF/
+cp -R bin/ $BASHWF/
 
 if [[ $OSTYPE == "msys" ]]; then
     echo 'Win32 Detected. Cant chmod here.'
@@ -26,9 +32,9 @@ else
 fi
 
 echo ""
-cp_rename .bash_path ~
-cp_rename .bash_path.opt ~
-cp_rename bashwf ~
+cp_rename .bash_path $BASHWF
+cp_rename .bash_path.opt $BASHWF
+cp_rename bashwf $BASHWF
 
 echo "
 Use can use this function to quickly load bash workflow.
@@ -36,6 +42,6 @@ Just insert it into your .profile/.bashrc/shell specific init file you use.
 
 function wf()
 {
-  source ~/bashwf
+  source \${HOME}/bashwf/bashwf
 }
 "
