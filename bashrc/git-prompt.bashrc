@@ -10,13 +10,13 @@ if command_exists "git"; then
     }
 
     if [ "$color_prompt" = yes ]; then
-        PS1='\n\[\033[01;32m\]\u@\h \[\033[01;33m\]\W $(parse_git_branch)\[\033[0m\]\n$ '
+        PS1='\n\[\033[00;32m\]\u@\h \[\033[00;33m\]\W $(parse_git_branch)\[\033[0m\]\n$ '
     else
         PS1='\n\u@\h \W $(parse_git_branch)\n\$ '
     fi
 else
     if [ "$color_prompt" = yes ]; then
-        PS1='\n\[\033[01;32m\]\u@\h \[\033[01;33m\]\W \[\033[0m\]\n$ '
+        PS1='\n\[\033[00;32m\]\u@\h \[\033[00;33m\]\W \[\033[0m\]\n$ '
     else
         PS1='\n\u@\h \W \n\$ '
     fi
