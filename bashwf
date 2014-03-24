@@ -1,3 +1,4 @@
+#!/bin/bash
 
 
 # If we are not in our home directory cd to it.
