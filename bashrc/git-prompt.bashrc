@@ -1,5 +1,5 @@
 
-if [ -n $FORCE_COLOR_WORKFLOW && $FORCE_COLOR_WORKFLOW == "TRUE" ]; then
+if [[ -n $FORCE_COLOR_WORKFLOW && $FORCE_COLOR_WORKFLOW == "TRUE" ]]; then
     color_prompt=yes
     unset FORCE_COLOR_WORKFLOW;
 fi

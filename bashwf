@@ -2,7 +2,7 @@
 
 BASHWF="${HOME}/bashwf"
 
-source bashwf_config
+source "$BASHWF/bashwf_config"
 
 # If we are not in our home directory cd to it.
 if [[ "$(pwd)" != "${HOME}" ]]; then
