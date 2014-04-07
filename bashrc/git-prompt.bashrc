@@ -23,6 +23,7 @@ else
 fi
 
 if [[ -n $UNICODE_WORKFLOW && $UNICODE_WORKFLOW == "TRUE" ]]; then
+    # This is the lambda character from the Half-Life video game series.
     PROMPT_CHAR='\316\273'
 else
     PROMPT_CHAR='$'
