@@ -1,0 +1,47 @@
+#!/bin/bash
+# Virtual Host Site Control Script
+
+AVAILABLE="/etc/nginx/sites-available"
+ENABLED="/etc/nginx/sites-enabled"
+
+ACTION="$1"
+SITE="$2"
+
+function enable_site()
+{
+  if [[ ! -f "$ENABLED/$1.conf" ]]; then
+    ln -s "$AVAILABLE/$1.conf" "$ENABLED/$1.conf"
+    echo "Site $1 enabled."
+    systemctl reload nginx
+  else
+    echo "Site already enabled."
+  fi
+}
+
+function disable_site()
+{
+  if [[ -f "$ENABLED/$1.conf" ]]; then
+    rm "$ENABLED/$1.conf"
+    echo "Site $1 disabled."
+    systemctl reload nginx
+  else
+    echo "Site already disabled."
+  fi
+}
+
+function usage()
+{
+  me=`basename $0`
+  echo "Usage $me <[enable|disable]> <site>"
+}
+
+case "$ACTION" in
+  "enable") enable_site "$SITE";;
+  "disable") disable_site "$SITE";;
+  "--help") usage;;
+  "-h") usage;;
+  *)
+    echo "Invalid or empty action"
+    usage
+    ;;
+esac
