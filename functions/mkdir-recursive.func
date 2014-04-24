@@ -1,0 +1,15 @@
+#!/bin/bash
+
+function mkdir-recursive()
+{
+    DIRECTORY="$1"
+
+    for dir in $(ls -1d */)
+    do
+        if [ ! -d "$dir$DIRECTORY" ]
+        then
+            echo "$dir$DIRECTORY"
+            mkdir "$dir$DIRECTORY"
+        fi
+    done
+}

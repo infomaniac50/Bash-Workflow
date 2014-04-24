@@ -1,0 +1,15 @@
+#!/bin/bash
+
+function recursive-git-mv()
+{
+    FILENAME="$1"
+    SUBDIR="$2"
+    for dir in $(ls -1d */)
+    do
+        if [[ -f "$dir$FILENAME" && -d "$dir$SUBDIR" ]]
+        then
+          echo "$dir$FILENAME" "$dir$SUBDIR/"
+          git mv "$dir$FILENAME" "$dir$SUBDIR/"
+        fi
+    done
+}
