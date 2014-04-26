@@ -27,7 +27,7 @@ if [[ $OSTYPE == "msys" ]]; then
 else
     while read line
     do
-        chmod u+x "${HOME}/bin/$line"
+        chmod u+x "${BASHWF}/bin/$line"
     done < <(ls bin/)
 fi
 
