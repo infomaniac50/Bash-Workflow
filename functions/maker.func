@@ -2,12 +2,12 @@
 
 function maker()
 {
-    $PATHFILE="$BASHWF/paths/$1.txt"
+    PATHFILE="$BASHWF/paths/$1.txt"
 
     if [[ -f $PATHFILE ]]; then
         while read DIR; do
             PATH="$PATH":"$DIR"
-        done < "$1"
+        done < "$PATHFILE"
 
         echo "Loaded $PATHFILE"
         return 0

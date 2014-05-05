@@ -10,3 +10,5 @@ if [[ -f $PATHFILE ]]; then
         fi
     done < $PATHFILE
 fi
+
+unset PATHFILE
