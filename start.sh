@@ -32,8 +32,6 @@ else
 fi
 
 echo ""
-cp_rename .bash_path $BASHWF
-cp_rename .bash_path.opt $BASHWF
 cp_rename bashwf $BASHWF
 cp_rename bashwf_config $BASHWF
 

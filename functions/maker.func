@@ -1,0 +1,18 @@
+#!/bin/bash
+
+function maker()
+{
+    $PATHFILE="$BASHWF/paths/$1.txt"
+
+    if [[ -f $PATHFILE ]]; then
+        while read DIR; do
+            PATH="$PATH":"$DIR"
+        done < "$1"
+
+        echo "Loaded $PATHFILE"
+        return 0
+    else
+        echo "Path file not found."
+        return 1
+    fi
+}

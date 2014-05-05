@@ -1,0 +1,9 @@
+/c/MinGW/bin
+/c/MinGW/include
+/c/MinGW/lib
+/c/MinGW/msys/1.0/include
+/c/MinGW/msys/1.0/lib
+/c/MinGW/msys/1.0/lib/openssl/engines-1.0.0
+/c/Users/Derek/usr/local/pcre/bin/
+/c/Users/Derek/usr/local/pcre/include/
+/c/Users/Derek/usr/local/pcre/lib/

@@ -1,4 +1,4 @@
-PATHFILE=$BASHWF/.bash_path
+PATHFILE=$BASHWF/paths/global.txt
 
 if [[ -f $PATHFILE ]]; then
     while read DIR
