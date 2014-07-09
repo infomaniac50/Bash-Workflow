@@ -1,0 +1,17 @@
+
+# http://www.commandlinefu.com/commands/view/7260/batch-rename-extension-of-all-files-in-a-folder-in-the-example-from-.txt-to-.md
+function chext ()
+{
+  if [[ $1 == '-n' ]]; then
+    shift
+    for f in *.$1;
+    do
+      echo "${f%$1}"{$1,$2};
+    done
+  else
+    for f in *.$1;
+    do
+      mv "${f%$1}"{$1,$2};
+    done
+  fi
+}

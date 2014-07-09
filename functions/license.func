@@ -1,0 +1,19 @@
+#!/bin/bash
+
+function license()
+{
+  local LICENSE
+  local VERSION
+  LICENSE=$1
+  VERSION=$2
+
+  if [[ -z $LICENSE ]]; then
+    LICENSE="gpl"
+  fi
+
+  if [[ -z $VERSION ]]; then
+    VERSION="3.0"
+  fi
+
+  curl "http://www.gnu.org/licenses/$LICENSE-$VERSION.txt" > "LICENSE.txt"
+}
