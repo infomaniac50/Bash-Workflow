@@ -1,0 +1,6 @@
+#!/bin/bash
+
+function wdadd()
+{
+  PATH=`pwd`:$PATH
+}
