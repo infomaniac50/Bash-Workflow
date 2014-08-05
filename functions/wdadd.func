@@ -2,5 +2,13 @@
 
 function wdadd()
 {
-  PATH=`pwd`:$PATH
+  if [[ -n $1 && $1 == "-s" ]]; then
+    cat ${HOME}/bashwf/paths/global.txt
+  elif [[ -n $1 && $1 == "-g" ]]; then
+    pwd >> ~/bashwf/paths/global.txt
+    echo "`pwd` added to your global path file."
+  else
+    PATH=`pwd`:$PATH
+  fi
 }
+

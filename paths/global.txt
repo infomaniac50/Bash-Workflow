@@ -1,2 +1,2 @@
-~/.bashwf/bin
-~/.bashwf/bin/git
+~/bashwf/bin
+~/bashwf/bin/git
