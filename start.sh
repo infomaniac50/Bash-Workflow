@@ -22,6 +22,11 @@ cp -R bashrc/ $BASHWF/
 cp -R functions/ $BASHWF/
 cp -R bin/ $BASHWF/
 
+# Don't overwrite the path folder if it already exists.
+if [[ ! -d $BASHWF/paths/ ]]; then
+  cp -R paths/ $BASHWF/
+fi
+
 if [[ $OSTYPE == "msys" ]]; then
     echo 'Win32 Detected. Cant chmod here.'
 else
