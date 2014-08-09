@@ -14,6 +14,7 @@ function cp_rename()
     fi
 }
 
+# Create the bashwf directory if it doesn't exist.
 if [[ ! -d $BASHWF ]]; then
     mkdir $BASHWF
 fi
@@ -30,10 +31,10 @@ fi
 if [[ $OSTYPE == "msys" ]]; then
     echo 'Win32 Detected. Cant chmod here.'
 else
-    while read line
-    do
-        chmod u+x "${BASHWF}/bin/$line"
-    done < <(ls bin/)
+  for FILE in $(find bin/ -type f)
+  do
+    chmod u+x "$FILE"
+  done
 fi
 
 echo ""
