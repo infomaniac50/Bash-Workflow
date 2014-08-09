@@ -31,7 +31,7 @@ fi
 if [[ $OSTYPE == "msys" ]]; then
     echo 'Win32 Detected. Cant chmod here.'
 else
-  for FILE in $(find bin/ -type f)
+  for FILE in $(find ${BASHWF}/bin/ -type f)
   do
     chmod u+x "$FILE"
   done
