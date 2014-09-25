@@ -14,14 +14,23 @@ function cp_rename()
     fi
 }
 
+function cp_folder()
+{
+  if [[ ! -d $BASHWF/$1 ]]; then
+    mkdir $BASHWF/$1
+  fi
+
+  cp -R $1/* $BASHWF/$1/
+}
+
 # Create the bashwf directory if it doesn't exist.
 if [[ ! -d $BASHWF ]]; then
     mkdir $BASHWF
 fi
 
-cp -R bashrc/ $BASHWF/
-cp -R functions/ $BASHWF/
-cp -R bin/ $BASHWF/
+cp_folder bashrc
+cp_folder functions
+cp_folder bin
 
 # Don't overwrite the path folder if it already exists.
 if [[ ! -d $BASHWF/paths/ ]]; then
