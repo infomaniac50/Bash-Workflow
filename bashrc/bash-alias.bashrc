@@ -5,6 +5,16 @@ if [[ $OSTYPE != "msys" ]]; then
     alias ping='ping -c 5'
 fi
 
+# Mac check
+if [[ $OSTYPE == darwin* ]]; then
+  # BSD uses environment variables
+  export CLICOLOR=1
+  export LSCOLORS="gxfxcxdxbxegedabagacad"
+else
+  # BSD doesn't have the --color arg.
+  alias ls='ls --color=auto'
+fi
+
 alias ....='cd ../../../'
 alias ...='cd ../../'
 alias ..='cd ..'
@@ -12,7 +22,7 @@ alias cd..='cd ..'
 alias cold='cd $OLDPWD'
 alias la='ls -la'
 alias ll='ls -l'
-alias ls='ls --color=auto'
+
 alias lsdir='ls -d */'
 alias mount='mount | column -t'
 alias now='date +"%T"'
