@@ -31,7 +31,7 @@ function try_source_path()
 
     # Load our bashrc modules if they exist
     if [[ -d "$MODULE_PATH" ]]; then
-        ls -1 $MODULE_PATH/*.$EXTENSION > /tmp/bashmod.tmp
+        ls -1 $MODULE_PATH/*.$EXTENSION > ./bashmod.tmp
 
         while read MODULE
         do
@@ -39,9 +39,9 @@ function try_source_path()
             MODULE_NAME=${MODULE_NAME%.*}
             echo -n "$MODULE_NAME: "
             source $MODULE
-        done < /tmp/bashmod.tmp
+        done < ./bashmod.tmp
 
-        rm -f /tmp/bashmod.tmp
+        rm -f ./bashmod.tmp
     fi
 }
 
