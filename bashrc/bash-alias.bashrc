@@ -24,7 +24,7 @@ alias la='ls -la'
 alias ll='ls -l'
 
 alias lsdir='ls -d */'
-alias mount='mount | column -t'
+alias lmount='mount | column -t'
 alias now='date +"%T"'
 alias ports='netstat -tulanp'
 alias v:h='vagrant halt'
