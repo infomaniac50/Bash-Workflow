@@ -7,10 +7,15 @@ echo ""
 function cp_rename()
 {
     if [[ ! -f $2/$1 ]]; then
-        cp $1 $2/$1
+      echo "Copying $1 to $2/$1"
+      cp $1 $2/$1
     else
+      if [[ $(diff -q $1 $2/$1) ]]; then
+        echo "$1 exists copying as $1.new"
         cp $1 $2/$1.new
-        echo $1 exists copying as $1.new
+      else
+        echo "Skipping file $1 with equal content."
+      fi
     fi
 }
 
