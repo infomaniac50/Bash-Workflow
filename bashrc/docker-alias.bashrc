@@ -8,3 +8,6 @@ alias dki="docker run -t -i -P"
 drm() { docker rm $(docker ps -q -a); }
 dri() { docker rmi $(docker images -q); }
 dkb() { docker build -t="$1" .; }
+
+# These are mine
+alias dps="docker ps"
