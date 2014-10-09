@@ -11,3 +11,4 @@ dkb() { docker build -t="$1" .; }
 
 # These are mine
 alias dps="docker ps"
+alias dim="docker images"
