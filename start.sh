@@ -48,7 +48,7 @@ fi
 
 echo ""
 cp_rename bashwf $BASHWF
-cp_rename bashwf_config $BASHWF
+cp_rename config $BASHWF
 
 echo "
 Use can use this function to quickly load bash workflow.
