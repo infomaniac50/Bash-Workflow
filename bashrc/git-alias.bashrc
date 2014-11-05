@@ -8,6 +8,7 @@ git_config_alias()
 }
 
 git_config_alias br branch
+git_config_alias co checkout
 git_config_alias com commit
 git_config_alias sh stash
 git_config_alias dif diff
