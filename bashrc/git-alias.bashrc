@@ -15,3 +15,9 @@ git_config_alias dif diff
 git_config_alias di diff
 git_config_alias st status
 git_config_alias fe fetch
+
+# Github hub alias
+# hub browse
+git_config_alias bro browse
+
+unset -f git_config_alias

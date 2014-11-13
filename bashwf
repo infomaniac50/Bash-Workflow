@@ -16,6 +16,15 @@ case "$TERM" in
     xterm-color) color_prompt=yes;;
 esac
 
+if [[ $TERM == "linux" ]]; then
+    UNICODE_WORKFLOW="FALSE"
+fi
+
+if [[ -n $FORCE_COLOR_WORKFLOW && $FORCE_COLOR_WORKFLOW == "TRUE" ]]; then
+    color_prompt=yes
+    unset FORCE_COLOR_WORKFLOW;
+fi
+
 function command_exists()
 {
     hash "$1" 2>/dev/null

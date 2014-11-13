@@ -32,3 +32,6 @@ alias v:p='vagrant suspend'
 alias v:s='vagrant ssh'
 alias v:u='vagrant up'
 alias zlist='tar --list -zf'
+
+#Github hub alias
+alias git=hub
