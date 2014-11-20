@@ -16,8 +16,12 @@ git_config_alias di diff
 git_config_alias st status
 git_config_alias fe fetch
 
-# Github hub alias
-# hub browse
-git_config_alias bro browse
+if command_exists hub; then
+  #Github hub alias
+  alias git=hub
+
+  # hub browse
+  git_config_alias bro browse
+fi
 
 unset -f git_config_alias
