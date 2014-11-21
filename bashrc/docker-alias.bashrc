@@ -1,14 +1,15 @@
 
 # http://www.kartar.net/2014/03/some-useful-docker-bash-functions-and-aliases/
 # Slightly modified
+# I like consistency use dk prefix for everything
 alias dk="docker"
-alias dip="docker inspect --format '{{ .NetworkSettings.IPAddress }}'"
+alias dkip="docker inspect --format '{{ .NetworkSettings.IPAddress }}'"
 alias dkd="docker run -d -P"
 alias dki="docker run -t -i -P"
-drm() { docker rm $(docker ps -q -a); }
-dri() { docker rmi $(docker images -q); }
+dkrm() { docker rm $(docker ps -q -a); }
+dkri() { docker rmi $(docker images -q); }
 dkb() { docker build -t="$1" .; }
 
 # These are mine
-alias dps="docker ps"
-alias dim="docker images"
+alias dkps="docker ps"
+alias dkim="docker images"
