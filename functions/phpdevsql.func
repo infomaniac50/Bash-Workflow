@@ -1,4 +1,0 @@
-
-function phpdevsql() {
-    sshmysql -i ~/.ssh/derek\@phpdev.engagemobility.com derek@phpdev.engagemobility.com
-}
