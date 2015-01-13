@@ -1,4 +1,5 @@
 PATHFILE=$BASHWF/paths/global.txt
+NEWPATH=""
 
 if [[ -f $PATHFILE ]]; then
     while read DIR
@@ -6,9 +7,12 @@ if [[ -f $PATHFILE ]]; then
         DIR=$(eval echo $DIR)
         if [[ -d $DIR ]]
         then
-            PATH=$PATH:$DIR
+            NEWPATH="$NEWPATH$DIR:"
         fi
     done < $PATHFILE
 fi
 
+PATH="$NEWPATH$PATH"
+
+unset NEWPATH
 unset PATHFILE
