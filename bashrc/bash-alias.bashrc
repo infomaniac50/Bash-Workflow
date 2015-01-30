@@ -22,6 +22,8 @@ alias cd..='cd ..'
 alias cold='cd $OLDPWD'
 alias la='ls -la'
 alias ll='ls -l'
+alias lh='ls -lh'
+alias dush='du -sh *'
 
 alias lsdir='ls -d */'
 alias lmount='mount | column -t'
