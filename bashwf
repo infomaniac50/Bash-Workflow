@@ -1,68 +1,24 @@
 #!/bin/bash
 
-BASHWF="${HOME}/bashwf"
-
-source "$BASHWF/config"
-
-# If we are not in our home directory cd to it.
-if [[ "$(pwd)" != "${HOME}" ]]; then
-    cd "${HOME}"
+if [[ -n $BASHWF ]]; then
+  # Bash Workflow has already been setup. This might be a subshell.
+  SUBWF="$BASHWF"
+else
+  BASHWF="${HOME}/bashwf"
 fi
 
-color_prompt=no
+source "${BASHWF}/config"
+source "${BASHWF}/utils.func"
+source "${BASHWF}/init_unicode.sh"
+source "${BASHWF}/init_colors.sh"
 
-case "$TERM" in
-    cygwin) color_prompt=yes;;
-    xterm-color) color_prompt=yes;;
-esac
-
-if [[ $TERM == "linux" ]]; then
-    UNICODE_WORKFLOW="FALSE"
+if [[ -z $SUBWF ]]; then
+  # Bash Workflow has already been setup. This might be a subshell. 
+  source "${BASHWF}/init.sh"
 fi
-
-if [[ -n $FORCE_COLOR_WORKFLOW && $FORCE_COLOR_WORKFLOW == "TRUE" ]]; then
-    color_prompt=yes
-    unset FORCE_COLOR_WORKFLOW;
-fi
-
-function command_exists()
-{
-    hash "$1" 2>/dev/null
-    return $?
-}
-
-function try_source_path()
-{
-    RELPATH="$1"
-    EXTENSION="$2"
-
-    MODULE_PATH="$BASHWF/${RELPATH}"
-
-    # Load our bashrc modules if they exist
-    if [[ -d "$MODULE_PATH" ]]; then
-
-        for MODULE in $MODULE_PATH/*.$EXTENSION
-        do
-            MODULE_NAME=${MODULE##*/}
-            MODULE_NAME=${MODULE_NAME%.*}
-            echo -n "$MODULE_NAME: "
-            source $MODULE
-        done
-
-    fi
-}
-
-echo ""
-echo "Loading Bash Modules"
-try_source_path "bashrc" "bashrc"
-
-echo ""
-echo "Loading Bash Functions"
-try_source_path "functions" "func"
-
-echo ""
-
-unset color_prompt;
 
 # Let the new shell use our PATH
 export PATH
+
+# Bash Workflow is now setup.
+export BASHWF
