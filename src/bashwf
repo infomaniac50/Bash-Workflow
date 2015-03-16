@@ -7,8 +7,8 @@ else
   BASHWF="${HOME}/bashwf"
 fi
 
-source "${BASHWF}/config"
-source "${BASHWF}/utils.func"
+source "${BASHWF}/config.sh"
+source "${BASHWF}/utils.sh"
 source "${BASHWF}/init_unicode.sh"
 source "${BASHWF}/init_colors.sh"
 
