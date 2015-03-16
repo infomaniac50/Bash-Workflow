@@ -3,8 +3,8 @@
 cd src/
 
 BASHWF="${HOME}/bashwf"
-file_list="colors nocolors config utils.func init.sh init_unicode.sh init_colors.sh bashwf"
-folder_list="bashrc functions bin"
+file_list="bashwf colors.sh config.sh init.sh init_colors.sh init_unicode.sh nocolors.sh utils.sh"
+folder_list="bashrc bin functions"
 
 # Text color variables
 txtgrn='\e[0;32m'       # green
