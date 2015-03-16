@@ -11,7 +11,7 @@ cd src/
 status=0
 all=0
 
-folders="bashrc bin bin/git"
+folders="bashrc bin bin/git functions"
 files="bashwf colors.sh config.sh init.sh init_colors.sh init_unicode.sh nocolors.sh utils.sh"
 ignore="bin/pushpop"
 
