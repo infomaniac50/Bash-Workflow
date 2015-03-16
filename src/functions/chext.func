@@ -1,3 +1,4 @@
+#!/bin/bash
 
 # http://www.commandlinefu.com/commands/view/7260/batch-rename-extension-of-all-files-in-a-folder-in-the-example-from-.txt-to-.md
 function chext ()

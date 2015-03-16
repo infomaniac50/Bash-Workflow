@@ -1,3 +1,4 @@
+#!/bin/bash
 function dirs2gz()
 {
     while read DIR; do echo ${DIR%/} && tar -czf ${DIR%/}.tar.gz $DIR; done < <(ls -d */)

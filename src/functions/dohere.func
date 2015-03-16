@@ -1,3 +1,4 @@
+#!/bin/bash
 function dohere() { while read FILE; do $1 "${FILE#\.\/}"; done < <(find . -type f); }
 function dotofile() { while read FILE; do $1 "${FILE#\.\/}"; done < <(find . -type f) > $2; }
 function dotohere() { while read FILE; do $1 "${FILE#\.\/}" > $2; done < <(find . -type f); }
