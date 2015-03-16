@@ -1,0 +1,80 @@
+#!/bin/bash
+
+config="${HOME}/.bwf-workspace"
+
+function usage()
+{
+  echo "Workspace Switcher"
+}
+
+function switch()
+{
+  if exists $1; then
+    echo cd $$1
+  fi
+}
+
+function add()
+{
+  if ! exists $1; then
+    local key=$1
+    local value=$2
+    echo "$key=\"$value\"" >> $config
+  fi
+}
+
+function remove()
+{
+  local key="$1"
+
+  touch "$config.rm"
+
+  while read $line; do
+    if [[ $line != $key* ]]; then
+      echo "$line" >> "$config.rm"
+    fi
+  done < $config
+  mv "$config.rm" $config
+
+}
+
+function exists()
+{
+  return [[ -n $1 ]];
+}
+
+function setup()
+{
+  if [[ ! -f $config ]]; then
+    touch $config
+  fi
+}
+
+function workspace()
+{
+  case $1 in
+    'cd' )
+      switch $2
+      ;;
+    'add' )
+      add $2 $3
+      ;;
+    'remove' )
+      remove $2
+      ;;
+    'update' )
+      remove $2
+      add $2 $3
+      ;;
+    'exists' )
+      exists $2
+      ;;
+    * )
+      usage
+      ;;
+  esac
+}
+
+setup
+source $config
+workspace $@
