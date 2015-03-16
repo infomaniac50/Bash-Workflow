@@ -13,8 +13,11 @@ function askyesno()
 
     echo -n "$QUESTION [yes|no] "
     read ANSWER
-    [[ $ANSWER == 'yes' || $ANSWER == 'y' ]];
-    return $?;
+    if [[ $ANSWER == 'yes' || $ANSWER == 'y' ]]; then
+        return 0
+    else
+        return 1
+    fi
 }
 
 function try_source_path()
