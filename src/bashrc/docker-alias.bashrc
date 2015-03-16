@@ -12,5 +12,15 @@ dkb() { docker build -t="$1" .; }
 # These are mine
 # Remove all untagged images
 dkrn() { for image in $(dk images | awk '{ print $1, $3 }' | grep '<none>' | cut -f2 -d ' '); do dk rmi $image; done; }
+dksh()
+{
+  if [[ -z $1 ]]; then
+    echo "You didn't specify a container."
+    return 1
+  else
+    docker exec -it $1 /bin/bash
+  fi
+}
+
 alias dkps="docker ps"
 alias dkim="docker images"
