@@ -60,7 +60,7 @@ function setup()
   # Don't overwrite the path folder if it already exists.
   if [[ ! -d $BASHWF/paths/ ]]; then
     echo_info "Copying paths directory."
-    cp -R paths/ $BASHWF/
+    cp_folder paths
   else
     echo_warn "Skipping paths directory because it already exists."
   fi
