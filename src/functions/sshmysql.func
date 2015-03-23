@@ -15,5 +15,5 @@ function sshmysql()
     fi
   fi
 
-  ssh -L $PORT:127.0.0.1:3306 $*
+  ssh -L$PORT:127.0.0.1:3306 $*
 }
