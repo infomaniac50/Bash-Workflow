@@ -1,3 +1,4 @@
+#!/bin/bash
 if command_exists vagrant; then
   alias va='vagrant'
   alias vup='vagrant up'

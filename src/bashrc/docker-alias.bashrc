@@ -1,3 +1,4 @@
+#!/bin/bash
 
 # http://www.kartar.net/2014/03/some-useful-docker-bash-functions-and-aliases/
 # Slightly modified

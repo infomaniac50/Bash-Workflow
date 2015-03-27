@@ -1,3 +1,4 @@
+#!/bin/bash
 SSHAGENT=`which ssh-agent`
 SSHAGENTARGS="-s"
 if [ -z "$SSH_AUTH_SOCK" -a -x "$SSHAGENT" ]; then

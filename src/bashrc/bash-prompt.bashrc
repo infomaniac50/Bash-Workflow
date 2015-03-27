@@ -1,3 +1,4 @@
+#!/bin/bash
 
 if [ "$color_prompt" = yes ]; then
     PS1='\n\[\033[00;32m\]\u@\h \[\033[00;33m\]\W'

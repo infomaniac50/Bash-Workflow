@@ -1,3 +1,4 @@
+#!/bin/bash
 
 if [[ $OSTYPE != "msys" ]]; then
     # Don't alias this on Windows as it causes problems with the native ping.

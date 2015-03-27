@@ -1,3 +1,4 @@
+#!/bin/bash
 PATHFILE=$BASHWF/paths/global.txt
 NEWPATH=""
 

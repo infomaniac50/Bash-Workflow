@@ -1,3 +1,4 @@
+#!/bin/bash
 
 git_config_alias()
 {
