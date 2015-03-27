@@ -25,5 +25,3 @@ if [[ $color_prompt == "yes" ]]; then
 else
   source "${BASHWF}/nocolors.sh"
 fi
-
-unset color_prompt;

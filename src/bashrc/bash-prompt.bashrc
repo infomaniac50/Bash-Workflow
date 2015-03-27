@@ -1,10 +1,7 @@
 #!/bin/bash
 
-if [ "$color_prompt" = yes ]; then
-    PS1='\n\[\033[00;32m\]\u@\h \[\033[00;33m\]\W'
-else
-    PS1='\n\u@\h \W'
-fi
+# If a color prompt does not exist then the color variables are just empty strings.
+PS1='\n'${txtgrn}'\u@\h '${txtylw}'\W'
 
 if command_exists "git"; then
     function parse_git_branch {
@@ -20,8 +17,7 @@ if [[ -n $UNICODE_WORKFLOW && $UNICODE_WORKFLOW == "TRUE" ]]; then
 else
     PROMPT_CHAR='$'
 fi
-if [ "$color_prompt" = yes ]; then
-    PS1=$PS1'\[\033[0m\]'
-fi
+
+PS1=$PS1${txtrst}
 
 PS1="$PS1\n$PROMPT_CHAR "
