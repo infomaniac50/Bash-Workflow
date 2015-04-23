@@ -25,7 +25,7 @@ fi
 
 mkdir -p "${log_dir}/tests"
 
-for test in tests/*; do
+for test in tests/*.sh; do
   output_log="${log_dir}/${test}_output.log" 
   error_log="${log_dir}/${test}_error.log"
   files_pass="${log_dir}/${test}_pass.log" 
