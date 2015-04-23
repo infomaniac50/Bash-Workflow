@@ -1,0 +1,42 @@
+#!/bin/bash
+
+if [[ -d /tmp ]]; then
+  mkdir -p /tmp/fragdiff
+  cmpdir=/tmp/fragdiff
+else
+  mkdir -p tmp/
+  cmpdir=tmp/
+fi
+
+if [[ $1 == "-q" ]]; then
+  short="y"
+  shift
+else
+  short="n"
+fi
+
+first=$1
+last=$2
+
+left="$3"
+right="$4"
+
+fragmap $first $last "$left" > "$cmpdir/left.txt"
+fragmap $first $last "$right" > "$cmpdir/right.txt"
+
+if [[ $short == "y" ]]; then
+  samemsg="== $left $right"
+  diffmsg="<> $left $right"
+else
+  samemsg="$left and $right are identical."
+  diffmsg="$left and $right are different."
+fi
+
+if diff -s -q "$cmpdir/left.txt" "$cmpdir/right.txt" >/dev/null 2>&1
+then
+  echo $samemsg
+  exit 0
+else
+  echo $diffmsg
+  exit 1
+fi

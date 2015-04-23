@@ -1,0 +1,28 @@
+#!/bin/bash
+
+if [[ $1 == "-q" ]]; then
+  short="y"
+  shift
+else
+  short="n"
+fi
+
+first=$1
+last=$2
+
+shift
+shift
+files=$@
+
+for left in $files; do
+  for right in $files; do
+    if [[ $left == $right ]]; then
+      continue;
+    fi
+    if [[ $short == "y" ]]; then
+      fragdiff -q $first $last "$left" "$right"
+    else
+      fragdiff $first $last "$left" "$right"
+    fi
+  done
+done
