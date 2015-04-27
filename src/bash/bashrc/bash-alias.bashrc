@@ -36,3 +36,6 @@ alias now='date +"%T"'
 # Current unix timestamp
 alias stamp='date +"%s"'
 
+# Archival rsync
+alias arsync='rsync -rlpPsthiD --stats'
+
