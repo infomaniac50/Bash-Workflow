@@ -1,6 +1,6 @@
 #!/bin/bash
 
-function metawf()
+function meta()
 {
   if [[ -z "$1" || -z "$2" ]]; then
     echo "metawf requires two arguments."
