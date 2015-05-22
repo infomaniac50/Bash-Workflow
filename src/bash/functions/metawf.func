@@ -1,0 +1,19 @@
+#!/bin/bash
+
+function metawf()
+{
+  if [[ -z "$1" || -z "$2" ]]; then
+    echo "metawf requires two arguments."
+    return 1
+  fi
+
+  case $(type -t "$1") in
+    function)
+      echo -n "function " >> "$2"
+      type "$1" | tail -n+2 >> "$2"
+      ;;
+    *)
+      echo "Currently only functions are implemented."
+      ;;
+  esac
+}
