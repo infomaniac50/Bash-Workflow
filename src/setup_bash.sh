@@ -1,4 +1,11 @@
 #!/bin/bash
+name="Bash Workflow"
+
+function check_requirements()
+{
+  # fake it
+  return 0;
+}
 
 function setup_bash()
 {

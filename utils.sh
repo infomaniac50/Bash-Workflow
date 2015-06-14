@@ -35,3 +35,9 @@ function cp_folder()
 
   cp -R $1/* $BASHWF/$1/
 }
+
+function command_exists ()
+{
+    hash "$1" 2>/dev/null;
+    return $?
+}

@@ -1,4 +1,17 @@
 #!/bin/bash
+name="Bash Workflow - C Supplements"
+
+dependencies="gcc"
+
+function check_requirements() {
+  for prog in $dependencies; do
+    if ! command_exists $prog; then
+      return 1;
+    fi;
+  done;
+
+  return 0;
+}
 
 function setup_c()
 {

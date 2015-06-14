@@ -12,13 +12,25 @@ tests_dir="$PWD/tests"
 cd src/
 
 for setup_file in $setup_list; do
-  echo_info "Begin $setup_file"
+  unset name
+  unset dependencies
+  unset check_requirements
+
   source setup_$setup_file.sh
-  setup_func="setup_$setup_file"
-  cd $setup_file/
-  eval "$setup_func"
-  cd ../
-  echo_info "End $setup_file"
+
+  echo_info "Begin $name"
+
+  if check_requirements; then
+    setup_func="setup_$setup_file"
+    cd $setup_file/
+    eval "$setup_func"
+    cd ../
+  else
+    echo_warn "Error installing $name: Requirements not met"
+  fi
+
+  echo_info "End $name"
+  echo ""
 done
 
 echo_pass "Setup Complete"
