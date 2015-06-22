@@ -1,0 +1,49 @@
+#!/bin/bash
+
+function config_example()
+{
+  cat <<EOF
+#!/bin/bash
+# config.sh.sample
+
+# Keep the trailing slashes consistent
+# if you want rsync to upload to the right place.
+
+# Local Project Directory
+local_='src/'
+
+# Remote Project Directory
+remote_='user@example.com:/home/user/public_html/'
+EOF
+
+}
+
+function usage()
+{
+  echo "Usage: $1 [push|pull] <extra rsync arguments>"
+}
+
+#main
+if [[ ! -f "config.sh" ]]; then
+  echo "config.sh does not exist!"
+  echo ""
+  config_example
+  exit 1
+fi
+
+source "config.sh"
+
+action="$1"
+shift
+
+case $action in
+  "pull" )
+    rsync -rlpPsthiD --stats $remote_ $local_ $@
+    ;;
+  "push" )
+    rsync -rlpPsthiD --stats $local_ $remote_ $@
+    ;;
+  * )
+    usage ${0##*/}
+    ;;
+esac

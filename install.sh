@@ -2,24 +2,19 @@
 
 BASHWF="${HOME}/bashwf"
 source utils.sh
-
-setup_list="bash c"
-echo_info "Bash Workflow Setup"
-
-src_dir="$PWD/src"
-tests_dir="$PWD/tests"
+source setup.sh
 
 cd src/
 
-for setup_file in $setup_list; do
-  echo_info "Begin $setup_file"
-  source setup_$setup_file.sh
-  setup_func="setup_$setup_file"
-  cd $setup_file/
-  eval "$setup_func"
-  cd ../
-  echo_info "End $setup_file"
-done
+echo_info "$name"
+
+if check_requirements; then
+  setup;
+else
+  echo_warn "Error installing $name: Requirements not met"
+fi
+
+echo ""
 
 echo_pass "Setup Complete"
 echo "

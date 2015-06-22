@@ -1,6 +1,13 @@
 #!/bin/bash
+name="Bash Workflow"
 
-function setup_bash()
+function check_requirements()
+{
+  # fake it
+  return 0;
+}
+
+function setup()
 {
   file_list="bashwf colors.sh config.sh init.sh init_colors.sh init_unicode.sh nocolors.sh utils.sh"
   folder_list="bashrc bin functions"

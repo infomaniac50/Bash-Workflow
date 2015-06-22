@@ -36,3 +36,11 @@ alias now='date +"%T"'
 # Current unix timestamp
 alias stamp='date +"%s"'
 
+# Archival rsync
+alias arsync='rsync -rlpPsthiD --stats'
+
+# Sublimish reveal command
+# Mostly used like reveal ./; # This opens the current directory in the file browser
+if command_exists exo-open; then
+  alias reveal='exo-open'
+fi
