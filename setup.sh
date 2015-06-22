@@ -7,7 +7,7 @@ function check_requirements()
   return 0;
 }
 
-function setup_bash()
+function setup()
 {
   file_list="bashwf colors.sh config.sh init.sh init_colors.sh init_unicode.sh nocolors.sh utils.sh"
   folder_list="bashrc bin functions"
