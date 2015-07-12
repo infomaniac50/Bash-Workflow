@@ -1,10 +1,15 @@
 #!/bin/bash
 
+# New functions
+# coder archive-new - copy config to ?new? backup folder
+# coder archive - run archive script.
+# Insta-Serve - Serve simple files and scripts with ngrok and php built-in web server.
+
 function config_example()
 {
   cat <<EOF
 #!/bin/bash
-# .config.sample
+# .coder.sample
 
 # Keep the trailing slashes consistent
 # if you want rsync to upload to the right place.
@@ -24,14 +29,14 @@ function usage()
 }
 
 #main
-if [[ ! -f ".config" ]]; then
-  echo ".config does not exist!"
+if [[ ! -f ".coder" ]]; then
+  echo ".coder does not exist!"
   echo ""
   config_example
   exit 1
 fi
 
-source ".config"
+source ".coder"
 
 action="$1"
 shift
