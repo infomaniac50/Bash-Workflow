@@ -28,27 +28,32 @@ function usage()
   echo "Usage: $1 [push|pull] <extra rsync arguments>"
 }
 
-#main
-if [[ ! -f ".coder" ]]; then
-  echo ".coder does not exist!"
-  echo ""
-  config_example
-  exit 1
-fi
+function main()
+{
+  if [[ ! -f ".coder" ]]; then
+    echo ".coder does not exist!"
+    echo ""
+    config_example
+    exit 1
+  fi
 
-source ".coder"
+  source ".coder"
 
-action="$1"
-shift
+  action="$1"
+  shift
 
-case $action in
-  "pull" )
-    rsync -rlpPsthiD --stats $remote_ $local_ $@
-    ;;
-  "push" )
-    rsync -rlpPsthiD --stats $local_ $remote_ $@
-    ;;
-  * )
-    usage ${0##*/}
-    ;;
-esac
+  case $action in
+    "pull" )
+      rsync -rlpPsthiD --stats "$remote_" "$local_" "$@"
+      ;;
+    "push" )
+      rsync -rlpPsthiD --stats "$local_" "$remote_" "$@"
+      ;;
+    * )
+      usage ${0##*/}
+      ;;
+  esac
+
+}
+
+main "$@"
