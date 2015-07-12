@@ -4,7 +4,7 @@ function config_example()
 {
   cat <<EOF
 #!/bin/bash
-# config.sh.sample
+# .config.sample
 
 # Keep the trailing slashes consistent
 # if you want rsync to upload to the right place.
@@ -24,14 +24,14 @@ function usage()
 }
 
 #main
-if [[ ! -f "config.sh" ]]; then
-  echo "config.sh does not exist!"
+if [[ ! -f ".config" ]]; then
+  echo ".config does not exist!"
   echo ""
   config_example
   exit 1
 fi
 
-source "config.sh"
+source ".config"
 
 action="$1"
 shift
