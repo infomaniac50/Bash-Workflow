@@ -20,7 +20,7 @@ EOF
 
 function usage()
 {
-  echo "Usage: $1 [push|pull] <extra rsync arguments>"
+  echo "Usage: ${0##*/} [push|pull] <extra rsync arguments>"
 }
 
 function main()
@@ -45,7 +45,7 @@ function main()
       rsync -rlpPsthiD --stats "$local_" "$remote_" "$@"
       ;;
     * )
-      usage ${0##*/}
+      usage
       ;;
   esac
 
