@@ -41,7 +41,7 @@ function archive()
   local answer="";
 
   if [[ -z $backup_ ]]; then
-    $backup_="backup"
+    backup_="backup"
   fi
 
   if [[ ! -d "$backup_" ]]; then
