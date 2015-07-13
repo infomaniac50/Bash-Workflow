@@ -1,5 +1,6 @@
 #!/bin/bash
 
+function stamp() { date +"%s"; }
 function arsync() { rsync -rlpPsthiD --stats "$@"; }
 
 function config_example()
@@ -25,6 +26,51 @@ function usage()
   echo "Usage: ${0##*/} [push|pull] <extra rsync arguments>"
 }
 
+
+function archive_real()
+{
+  archive_basename="${local_%%/}-"`stamp`
+  mkdir -p "$local_"
+
+  arsync --delete "$remote_" "$local_" "$@" && tar -c "$local_" | xz -c > "$archive_basename.tar.xz"
+  return $?
+}
+
+function archive()
+{
+  local answer="";
+
+  if [[ -z $backup_ ]]; then
+    $backup_="backup"
+  fi
+
+  if [[ ! -d "$backup_" ]]; then
+    read -p "The directory $backup_ does not exist. Do you want to create it? [y/n] " answer
+    if [[ $answer == "y" || $answer == "Y" ]]; then
+      mkdir -p "$backup_"
+    else
+      echo "Archive Canceled"
+      return 1
+  fi
+  answer="";
+
+  cd "$backup_"
+  if [[ -d "$local_" ]]; then
+    read -p "Local backup directory exists. Do you want to replace it? [y/n] " answer
+    if [[ $answer == "y" || $answer == "Y" ]]; then
+      echo "Overwriting directory content."
+      archive_real
+      return $?
+    else
+      echo "Archive Canceled"
+      return 1
+    fi
+  else
+    archive_real
+    return $?
+  fi
+}
+
 function main()
 {
   if [[ ! -f ".coder" ]]; then
@@ -45,6 +91,9 @@ function main()
       ;;
     "push" )
       arsync "$local_" "$remote_" "$@"
+      ;;
+    "archive" )
+      archive "$@"
       ;;
     * )
       usage
