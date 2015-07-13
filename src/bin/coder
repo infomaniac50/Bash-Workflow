@@ -1,5 +1,7 @@
 #!/bin/bash
 
+function arsync() { rsync -rlpPsthiD --stats "$@"; }
+
 function config_example()
 {
   cat <<EOF
@@ -39,10 +41,10 @@ function main()
 
   case $action in
     "pull" )
-      rsync -rlpPsthiD --stats "$remote_" "$local_" "$@"
+      arsync "$remote_" "$local_" "$@"
       ;;
     "push" )
-      rsync -rlpPsthiD --stats "$local_" "$remote_" "$@"
+      arsync "$local_" "$remote_" "$@"
       ;;
     * )
       usage
