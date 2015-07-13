@@ -51,6 +51,7 @@ function archive()
     else
       echo "Archive Canceled"
       return 1
+    fi
   fi
   answer="";
 
