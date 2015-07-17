@@ -25,12 +25,27 @@ function try_source_path()
     RELPATH="$1"
     EXTENSION="$2"
 
-    MODULE_PATH="$BASHWF/${RELPATH}"
+    SYS_MODULE_PATH="$BASHWF_SYS/${RELPATH}"
 
     # Load our bashrc modules if they exist
-    if [[ -d "$MODULE_PATH" ]]; then
+    if [[ -d "$SYS_MODULE_PATH" ]]; then
 
-        for MODULE in $MODULE_PATH/*.$EXTENSION
+        for MODULE in $SYS_MODULE_PATH/*.$EXTENSION
+        do
+            MODULE_NAME=${MODULE##*/}
+            MODULE_NAME=${MODULE_NAME%.*}
+            echo -n "$MODULE_NAME: "
+            source $MODULE
+        done
+
+    fi
+
+    USER_MODULE_PATH="$BASHWF_USER/${RELPATH}"
+
+    # Load our bashrc modules if they exist
+    if [[ -d "$USER_MODULE_PATH" ]]; then
+
+        for MODULE in $USER_MODULE_PATH/*.$EXTENSION
         do
             MODULE_NAME=${MODULE##*/}
             MODULE_NAME=${MODULE_NAME%.*}

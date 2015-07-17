@@ -11,9 +11,9 @@ cd src/
 status=0
 all=0
 
-folders="bashrc bin bin/git functions"
-files="bashwf colors.sh config.sh init.sh init_colors.sh init_unicode.sh nocolors.sh utils.sh"
-ignore="bin/pushpop"
+folders="system/bashrc system/bin system/bin/git system/functions"
+files="bashwf system/colors.sh system/config.sh system/init.sh system/init_colors.sh system/init_unicode.sh system/nocolors.sh system/utils.sh"
+ignore="system/bin/pushpop"
 
 function test_file()
 {
@@ -75,6 +75,6 @@ rmdir tmp
 
 if [[ $all == 0 ]]; then
   exit 0
-else 
+else
   exit 1
 fi
