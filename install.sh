@@ -1,6 +1,9 @@
 #!/bin/bash
 
 BASHWF="${HOME}/bashwf"
+BASHWF_SYS="$BASHWF/system"
+BASHWF_USER="$BASHWF/user"
+
 source utils.sh
 source setup.sh
 

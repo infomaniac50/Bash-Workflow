@@ -9,8 +9,8 @@ function check_requirements()
 
 function setup()
 {
-  file_list="bashwf colors.sh config.sh init.sh init_colors.sh init_unicode.sh nocolors.sh utils.sh"
-  folder_list="bashrc bin functions"
+  file_list="bashwf system/colors.sh system/config.sh system/init.sh system/init_colors.sh system/init_unicode.sh system/nocolors.sh system/utils.sh"
+  folder_list="system/bashrc system/bin system/functions"
 
   # Create the bashwf directory if it doesn't exist.
   if [[ ! -d $BASHWF ]]; then
@@ -18,10 +18,24 @@ function setup()
     mkdir $BASHWF
   fi
 
+  if [[ ! -d $BASHWF_SYS ]]; then
+    echo_info "Creating directory $BASHWF_SYS"
+    mkdir $BASHWF_SYS
+  else
+    echo_info "Recreating system directory $BASHWF_SYS"
+    rm -rf $BASHWF_SYS
+    mkdir $BASHWF_SYS
+  fi
+
+  if [[ ! -d $BASHWF_USER ]]; then
+    echo_info "Creating user directory $BASHWF_USER"
+    mkdir $BASHWF_USER
+  fi
+
   echo ""
   for folder in $folder_list; do
-    echo_info "Recursively copying directory $folder"
-    cp_folder $folder
+    echo_info "Recursively copying system directory $folder"
+    cp -ar $folder $BASHWF_SYS/
   done
 
   echo ""
@@ -37,7 +51,7 @@ function setup()
   if [[ $OSTYPE == "msys" ]]; then
       echo_warn 'Win32 Detected. Cant chmod here.'
   else
-    for file in $(find ${BASHWF}/bin/ -type f)
+    for file in $(find ${BASHWF}/system/bin/ -type f)
     do
       echo_info "Setting executable bit on $file"
       chmod u+x "$file"
