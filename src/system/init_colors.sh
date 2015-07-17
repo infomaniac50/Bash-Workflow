@@ -21,7 +21,7 @@ if [[ -n $FORCE_COLOR_WORKFLOW && $FORCE_COLOR_WORKFLOW == "TRUE" ]]; then
 fi
 
 if [[ $color_prompt == "yes" ]]; then
-  source "${BASHWF}/colors.sh"
+  source "colors.sh"
 else
-  source "${BASHWF}/nocolors.sh"
+  source "nocolors.sh"
 fi
