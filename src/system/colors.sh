@@ -15,8 +15,13 @@ bldblu='\e[1;34m'       # blue
 bldpur='\e[1;35m'       # purple
 bldcyn='\e[1;36m'       # cyan
 bldwht='\e[1;37m'       # white
-txtund=$(tput sgr 0 1)  # Underline
-txtbld=$(tput bold)     # Bold
+
+# My SGS3 Android OS doesn't have tput. If you've got it good for you.
+if command_exists tput; then
+  txtund=$(tput sgr 0 1)  # Underline
+  txtbld=$(tput bold)     # Bold
+fi
+
 txtrst='\e[0m'          # Text reset
 
 # Feedback indicators
