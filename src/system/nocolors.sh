@@ -29,20 +29,20 @@ warn=${bldylw}!${txtrst}
 # Feedback indicators
 function echo_info()
 {
-	echo -e "$*"
+  echo -e "$*"
 }
 
 function echo_pass()
 {
-	echo -e "$*"
+  echo -e "$*"
 }
 
 function echo_fail()
 {
-	echo -e "$*"
+  echo -e "$*"
 }
 
 function echo_warn()
 {
-	echo -e "$*"
+  echo -e "$*"
 }

@@ -33,20 +33,20 @@ warn=${bldylw}!${txtrst}
 # Feedback indicators
 function echo_info()
 {
-	echo -e "${bldcyn}$*${txtrst}"
+  echo -e "${bldcyn}$*${txtrst}"
 }
 
 function echo_pass()
 {
-	echo -e "${bldblu}$*${txtrst}"
+  echo -e "${bldblu}$*${txtrst}"
 }
 
 function echo_fail()
 {
-	echo -e "${bldred}$*${txtrst}"
+  echo -e "${bldred}$*${txtrst}"
 }
 
 function echo_warn()
 {
-	echo -e "${bldylw}$*${txtrst}"
+  echo -e "${bldylw}$*${txtrst}"
 }
