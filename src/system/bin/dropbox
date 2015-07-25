@@ -1,13 +1,51 @@
 #!/bin/bash
 PYTHON_BIN=`which python2`
 DROPBOX_PY="${HOME}/bin/dropbox.py"
+USERBIN="${HOME}/bin/"
+
+source ${BASHWF}/bashwf
+
+function run_py()
+{
+  if [[ -f $DROPBOX_PY ]]; then
+    $PYTHON_BIN $DROPBOX_PY $@
+    exit $?
+  else
+    if [[ ! -d $USERBIN ]]; then
+      echo_warn "Your user bin directory $USERBIN does not exist."
+      if askyesno "Would you like me to create it?"; then
+        echo "mkdir -p $USERBIN"
+        mkdir -p $USERBIN
+      fi
+    fi
+
+    if askyesno "dropbox.py not found. Do you want me to fetch it?"; then
+      if [[ ! -d $USERBIN ]]; then
+        echo_fail "Aborting..."
+        echo_fail "Can not download dropbox.py to the non existent directory $USERBIN."
+        exit 1
+      fi
+
+      echo_info "Downloading dropbox.py to $DROPBOX_PY"
+      curl -LSs 'https://www.dropbox.com/download?dl=packages/dropbox.py' > $DROPBOX_PY
+      echo_pass "Download Complete"
+      echo_info "Run your command again."
+    fi
+  fi
+}
 
 function update()
 {
-  WAS_RUNNING=$(dropbox running && echo "no" || echo "yes")
+  if run_py running; then
+    WAS_RUNNING="yes"
+  else
+    WAS_RUNNING="no"
+  fi
+  
+  echo $WAS_RUNNING;
 
   if [[ $WAS_RUNNING == "yes" ]]; then
-    dropbox stop
+    echo "run_py stop"
   fi
 
   echo "Updating Dropbox..."
@@ -15,32 +53,49 @@ function update()
   ARCH=`uname -m`
   [ $ARCH == 'i686' ] && ARCH='x86'
 
-  cd ~ && curl -L "https://www.dropbox.com/download?plat=lnx.$ARCH" | tar xzf -
+  echo_info "Downloading https://www.dropbox.com/download?plat=lnx.$ARCH"
+  echo "cd ~ && curl -L \"https://www.dropbox.com/download?plat=lnx.$ARCH\" | tar xzf -"
 
   if [[ $WAS_RUNNING == "yes" ]]; then
-    dropbox start
+    echo "run_py start"
   fi
 
   echo "Done"
 }
 
-ACTION="$1"
+function about()
+{
+  echo_info "Dropbox Update Helper\n"
 
-case "$ACTION" in
-  'update')
-    update
-  ;;
-  *)
-    if [[ -f $DROPBOX_PY ]]; then
-      $PYTHON_BIN $DROPBOX_PY $@
-      exit $?
-    else
-      echo -n "dropbox.py not found. Do you want me to fetch it? [yes|no] "
-      read ANSWER
-      if [[ $ANSWER == 'yes' || $ANSWER == 'y' ]]; then
-        curl -LSs 'https://www.dropbox.com/download?dl=packages/dropbox.py' > $DROPBOX_PY
-        echo "Done"
-      fi
-    fi
-  ;;
-esac
+  echo "A bash script to update dropbox using dropbox.py."
+  echo "As such it relies on dropbox.py for its pass-through functions."
+  echo "This script can also fetch dropbox.py from dropbox.com if you wish."
+  echo ""
+
+  echo_info "dropbox helper update:"
+  echo -e "\tUpdate the dropbox daemon from dropbox.com"
+  echo ""
+  
+  echo_info "dropbox helper about:"
+  echo -e "\tShow this screen."
+}
+
+if [[ $1 == "helper" ]]; then
+  shift
+  
+  case "$1" in
+    'about')
+      about
+    ;;
+    'update')
+      update
+    ;;
+    *)
+      about
+    ;;
+  esac
+else
+  echo_info "Dropbox Update Helper"
+  echo_info "Run \"dropbox helper\" for more info.\n"
+  run_py $@
+fi
