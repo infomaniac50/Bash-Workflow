@@ -3,6 +3,8 @@
 if [[ -n $BASHWF ]]; then
   # Bash Workflow has already been setup. This might be a subshell.
   SUBWF="$BASHWF"
+  BASHWF_SYS="$SUBWF/system"
+  BASHWF_USER="$SUBWF/user"
 else
   BASHWF="${HOME}/bashwf"
   BASHWF_SYS="$BASHWF/system"
