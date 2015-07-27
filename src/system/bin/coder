@@ -99,6 +99,10 @@ function main()
     "push" )
       arsync "$local_" "$remote_" $extra_ "$@"
       ;;
+    "fix_perms" )
+      find "$local_" -type d -exec chmod 755 '{}' \;
+      find "$local_" -type f -exec chmod 644 '{}' \;
+      ;;
     "archive" )
       archive "$@"
       ;;
