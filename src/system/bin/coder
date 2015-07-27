@@ -12,6 +12,9 @@ function config_example()
 # Keep the trailing slashes consistent
 # if you want rsync to upload to the right place.
 
+# Extra rsync arguments
+# extra_=""
+
 # Local Project Directory
 local_='src/'
 
