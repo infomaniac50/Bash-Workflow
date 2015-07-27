@@ -82,16 +82,19 @@ function main()
   fi
 
   source ".coder"
+  if [[ -z $extra_ ]]; then
+    extra_=""
+  fi
 
   action="$1"
   shift
 
   case $action in
     "pull" )
-      arsync "$remote_" "$local_" "$@"
+      arsync "$remote_" "$local_" $extra_ "$@"
       ;;
     "push" )
-      arsync "$local_" "$remote_" "$@"
+      arsync "$local_" "$remote_" $extra_ "$@"
       ;;
     "archive" )
       archive "$@"
