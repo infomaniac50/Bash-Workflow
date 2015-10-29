@@ -9,7 +9,7 @@ function check_requirements()
 
 function setup()
 {
-  file_list="bashwf system/colors.sh system/config.sh system/init.sh system/init_colors.sh system/init_unicode.sh system/nocolors.sh system/utils.sh"
+  file_list="bashwf system/colors.sh system/config.sh system/sys_init.sh system/export.sh system/init.sh system/init_colors.sh system/init_unicode.sh system/nocolors.sh system/utils.sh"
   folder_list="system/bashrc system/bin system/functions"
 
   # Create the bashwf directory if it doesn't exist.
