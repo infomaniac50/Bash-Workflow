@@ -13,7 +13,7 @@ if command_exists docker; then
   dkb() { docker build -t="$1" .; }
   # These are mine
   # Remove all untagged images
-  dkrn() { for image in $(dk images | awk '{ print $1, $3 }' | grep '<none>' | cut -f2 -d ' '); do dk rmi $image; done; }
+  dkrn() { for image in $(docker images | awk '{ print $1, $3 }' | grep '<none>' | cut -f2 -d ' '); do docker rmi $image; done; }
   dksh()
   {
     if [[ -z $1 ]]; then
