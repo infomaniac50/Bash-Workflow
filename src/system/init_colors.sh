@@ -7,7 +7,7 @@
 
 color_prompt=no
 
-pretty_terminal_list="cygwin xterm-color"
+pretty_terminal_list="cygwin xterm xterm-color"
 
 for terminal in $pretty_terminal_list; do
   if [[ $TERM == $terminal ]]; then
