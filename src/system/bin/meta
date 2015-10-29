@@ -1,0 +1,57 @@
+#!/bin/bash
+
+implemented="Only aliases, functions, and files are currently implemented."
+
+function usage()
+{
+  echo "meta [-tf] <alias|function|script>"
+  echo "Prints the definition of any alias, function, or executable shell script."
+  echo ""
+  echo "Example:"
+  echo "meta meta"
+}
+
+function fail()
+{
+  exit 1
+}
+
+function pass()
+{
+  exit 0
+}
+
+function main()
+{
+  if [[ -z "$1" ]]; then
+    usage
+    fail
+    return 1
+  fi
+
+  local file="$1"
+
+  case $(type -t "$file") in
+    function)
+      echo -n "function "
+      type "$file" | tail -n+2
+      ;;
+    alias)
+      alias "$file"
+      ;;
+    file)
+      file=`type -fp "$file"`
+      mime=$(file --brief --mime-type "$file")
+
+      if [[ -f "$file" && $mime == text* ]]; then
+        cat "$file"
+      else
+        echo "Binary File"
+        echo $mime
+      fi
+      ;;
+    *)
+      echo $implemented
+      ;;
+  esac
+}
