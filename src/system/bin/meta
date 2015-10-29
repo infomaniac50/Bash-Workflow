@@ -4,11 +4,13 @@ implemented="Only aliases, functions, and files are currently implemented."
 
 function usage()
 {
-  echo "meta [-tf] <alias|function|script>"
-  echo "Prints the definition of any alias, function, or executable shell script."
-  echo ""
-  echo "Example:"
-  echo "meta meta"
+  cat <<EOF
+meta [-tf] <alias|function|script>
+Prints the definition of any alias, function, or executable shell script.
+
+Example:
+meta meta # Prints self. Very Meta!
+EOF
 }
 
 function fail()
