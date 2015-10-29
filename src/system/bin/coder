@@ -1,7 +1,5 @@
 #!/bin/bash
-
-function stamp() { date +"%s"; }
-function arsync() { rsync -rlpPsthiD --stats "$@"; }
+source lib
 
 function config_example()
 {
@@ -77,14 +75,26 @@ function archive()
 
 function main()
 {
+  settings_file=".coder"
+
+  source "${BASHWF_SYS}/sys_init.sh"
+  # if .coder does not exist in the current directory
   if [[ ! -f ".coder" ]]; then
-    echo ".coder does not exist!"
-    echo ""
-    config_example
-    exit 1
+    if find_in_ancestor $settings_file; then
+      # Found .coder in one of the parent directories.
+      settings_file="$found_in_ancestor"
+      unset found_in_ancestor
+    else
+      echo_fail ".coder does not exist in this directory or any of it's parents!"
+      exit 1
+    fi
+  else
+    settings_file="${PWD}/${settings_file}"
   fi
 
-  source ".coder"
+  source "${settings_file}"
+  local_="$(dirname $settings_file)/${local_}"
+
   if [[ -z $extra_ ]]; then
     extra_=""
   fi
