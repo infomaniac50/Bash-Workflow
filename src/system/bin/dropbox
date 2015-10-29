@@ -1,63 +1,58 @@
 #!/bin/bash
-PYTHON_BIN=`which python2`
-DROPBOX_PY="${HOME}/bin/dropbox.py"
-USERBIN="${HOME}/bin/"
+python_bin=`type -fp python2`
+dropbox_py=`type -fp dropbox.py`
+userbin="${HOME}/bin/"
 
 source ${BASHWF}/bashwf
 
-function run_py()
+function download_py()
 {
-  if [[ -f $DROPBOX_PY ]]; then
-    $PYTHON_BIN $DROPBOX_PY $@
-    exit $?
-  else
-    if [[ ! -d $USERBIN ]]; then
-      echo_warn "Your user bin directory $USERBIN does not exist."
+    if [[ ! -d $userbin ]]; then
+      echo_warn "Your user bin directory $userbin does not exist."
       if askyesno "Would you like me to create it?"; then
-        echo "mkdir -p $USERBIN"
-        mkdir -p $USERBIN
+        echo "mkdir -p $userbin"
+        mkdir -p $userbin
       fi
     fi
 
     if askyesno "dropbox.py not found. Do you want me to fetch it?"; then
-      if [[ ! -d $USERBIN ]]; then
+      if [[ ! -d $userbin ]]; then
         echo_fail "Aborting..."
-        echo_fail "Can not download dropbox.py to the non existent directory $USERBIN."
+        echo_fail "Can not download dropbox.py to the non existent directory $userbin."
         exit 1
       fi
 
-      echo_info "Downloading dropbox.py to $DROPBOX_PY"
-      curl -LSs 'https://www.dropbox.com/download?dl=packages/dropbox.py' > $DROPBOX_PY
+      echo_info "Downloading dropbox.py to $dropbox_py"
+      curl -LSs 'https://www.dropbox.com/download?dl=packages/dropbox.py' > $dropbox_py
       echo_pass "Download Complete"
       echo_info "Run your command again."
     fi
-  fi
 }
 
 function update()
 {
-  if run_py running; then
-    WAS_RUNNING="yes"
+  # It's all lies here.
+  # dropbox.py seems to return a boolean value instead of an exit code.
+  if ! /usr/bin/env python2 $dropbox_py running; then
+    was_running="yes"
   else
-    WAS_RUNNING="no"
+    was_running="no"
   fi
-  
-  echo $WAS_RUNNING;
 
-  if [[ $WAS_RUNNING == "yes" ]]; then
-    echo "run_py stop"
+  if [[ $was_running == "yes" ]]; then
+    /usr/bin/env python2 $dropbox_py stop
   fi
 
   echo "Updating Dropbox..."
 
-  ARCH=`uname -m`
-  [ $ARCH == 'i686' ] && ARCH='x86'
+  arch=`uname -m`
+  [ $arch == 'i686' ] && arch='x86'
 
-  echo_info "Downloading https://www.dropbox.com/download?plat=lnx.$ARCH"
-  echo "cd ~ && curl -L \"https://www.dropbox.com/download?plat=lnx.$ARCH\" | tar xzf -"
+  echo_info "Downloading https://www.dropbox.com/download?plat=lnx.$arch"
+  cd ~ && curl -L "https://www.dropbox.com/download?plat=lnx.$arch" | tar xzf -
 
-  if [[ $WAS_RUNNING == "yes" ]]; then
-    echo "run_py start"
+  if [[ $was_running == "yes" ]]; then
+    /usr/bin/env python2 $dropbox_py start
   fi
 
   echo "Done"
@@ -75,14 +70,18 @@ function about()
   echo_info "dropbox helper update:"
   echo -e "\tUpdate the dropbox daemon from dropbox.com"
   echo ""
-  
+
   echo_info "dropbox helper about:"
   echo -e "\tShow this screen."
 }
 
+if [[ ! -f $dropbox_py ]]; then
+  download_py
+fi
+
 if [[ $1 == "helper" ]]; then
   shift
-  
+
   case "$1" in
     'about')
       about
@@ -97,5 +96,5 @@ if [[ $1 == "helper" ]]; then
 else
   echo_info "Dropbox Update Helper"
   echo_info "Run \"dropbox helper\" for more info.\n"
-  run_py $@
+  /usr/bin/env python2 $dropbox_py $@
 fi
