@@ -106,6 +106,9 @@ function main()
     "archive" )
       archive "$@"
       ;;
+    "status" )
+      arsync "$local_" "$remote_" $extra_ -n "$@"
+      ;;
     * )
       usage
       ;;
