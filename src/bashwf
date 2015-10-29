@@ -11,18 +11,11 @@ else
   BASHWF_USER="$BASHWF/user"
 fi
 
-source "${BASHWF_SYS}/config.sh"
-source "${BASHWF_SYS}/utils.sh"
-source "${BASHWF_SYS}/init_unicode.sh"
-source "${BASHWF_SYS}/init_colors.sh"
+source "${BASHWF_SYS}/sys_init.sh"
 
 if [[ -z $SUBWF ]]; then
   # Bash Workflow has already been setup. This might be a subshell.
   source "${BASHWF_SYS}/init.sh"
 fi
 
-# Let the new shell use our PATH
-export PATH
-
-# Bash Workflow is now setup.
-export BASHWF
+source "${BASHWF_SYS}/export.sh"
