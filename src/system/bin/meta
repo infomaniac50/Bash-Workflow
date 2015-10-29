@@ -23,12 +23,6 @@ function pass()
 
 function main()
 {
-  if [[ -z "$1" ]]; then
-    usage
-    fail
-    return 1
-  fi
-
   local file="$1"
 
   case $(type -t "$file") in
@@ -55,3 +49,11 @@ function main()
       ;;
   esac
 }
+
+if [[ -z "$1" ]]; then
+  usage
+  fail
+  return 1
+fi
+
+main $@
