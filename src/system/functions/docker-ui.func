@@ -3,6 +3,26 @@
 
 function docker-ui()
 {
-  docker pull dockerui/dockerui
-  docker run --name dockerui-container --rm -p 9000:9000 --privileged -v /var/run/docker.sock:/var/run/docker.sock dockerui/dockerui
+  if [[ -n $1 ]]; then
+    action="$1"
+  else
+    action="run"
+  fi
+
+  if [[ $action != "stop" ]]; then
+    docker pull dockerui/dockerui
+  fi
+
+  case $action in
+    run )
+      docker run --name dockerui-container --rm -p 9000:9000 --privileged -v /var/run/docker.sock:/var/run/docker.sock dockerui/dockerui
+      ;;
+    start )
+      docker run -d --name dockerui-container -p 9000:9000 --privileged -v /var/run/docker.sock:/var/run/docker.sock dockerui/dockerui
+      ;;
+    stop )
+      docker stop dockerui-container
+      docker rm dockerui-container
+      ;;
+  esac
 }
