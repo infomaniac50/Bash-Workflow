@@ -77,6 +77,24 @@ function main()
 {
   settings_file=".coder"
 
+  action="$1"
+  shift
+
+  case $action in
+    "example" )
+      config_example
+      exit 0
+      ;;
+    "help" )
+      usage
+      exit 0
+      ;;
+    "usage" )
+      usage
+      exit 0
+      ;;
+  esac
+
   source "${BASHWF_SYS}/sys_init.sh"
   # if .coder does not exist in the current directory
   if [[ ! -f ".coder" ]]; then
@@ -98,9 +116,6 @@ function main()
   if [[ -z $extra_ ]]; then
     extra_=""
   fi
-
-  action="$1"
-  shift
 
   case $action in
     "pull" )
