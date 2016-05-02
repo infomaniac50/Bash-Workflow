@@ -10,15 +10,15 @@ function dockerui()
   fi
 
   if [[ $action != "stop" ]]; then
-    docker pull dockerui/dockerui
+    docker pull uifd/ui-for-docker
   fi
 
   case $action in
     run )
-      docker run --name dockerui-container --rm -p 9000:9000 --privileged -v /var/run/docker.sock:/var/run/docker.sock dockerui/dockerui
+      docker run --name dockerui-container --rm -p 9000:9000 --privileged -v /var/run/docker.sock:/var/run/docker.sock uifd/ui-for-docker
       ;;
     start )
-      docker run -d --name dockerui-container -p 9000:9000 --privileged -v /var/run/docker.sock:/var/run/docker.sock dockerui/dockerui
+      docker run -d --name dockerui-container -p 9000:9000 --privileged -v /var/run/docker.sock:/var/run/docker.sock uifd/ui-for-docker
       ;;
     stop )
       docker stop dockerui-container
