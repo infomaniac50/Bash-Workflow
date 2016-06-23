@@ -27,6 +27,9 @@ EOF
       ;;
     file)
       file=`type -fp "$file"`
+      if [[ -L $file ]]; then
+        file=`readlink -f "$file"`
+      fi
       mime=$(file --brief --mime-type "$file")
 
       if [[ -f "$file" && $mime == text* ]]; then
