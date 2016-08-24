@@ -1,6 +1,6 @@
 #!/bin/bash
 
-function usage()
+usage()
 {
   echo 'pwait - Runs a subcommand and beeps when done.'
   echo '  Useful for notifying the user when a long running process has been completed.'
@@ -43,7 +43,7 @@ case $1 in
   ;;
 esac
 
-$@ < /dev/stdin > $OUT 2> $ERR &
+"$@" < /dev/stdin > $OUT 2> $ERR &
 PID=$!
 wait $PID;
 command -v beep >/dev/null 2>&1 && beep || { echo -en "Aw... No beep found. You may need to install it.\nBEEP!\a\n"; }

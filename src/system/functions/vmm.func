@@ -3,7 +3,7 @@
 
 if command_exists vboxmanage; then
 
-function vmm_uuid()
+vmm_uuid()
 {
 	VM=$(vboxmanage list vms | grep "$1")
 	if [[ -z $VM ]]; then echo "VM not found." && return 1; fi;

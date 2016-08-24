@@ -1,6 +1,6 @@
 #!/bin/bash
 
-if [[ -d /tmp ]]; then
+if [ -d /tmp ]; then
   mkdir -p /tmp/fragdiff
   cmpdir=/tmp/fragdiff
 else
@@ -8,7 +8,7 @@ else
   cmpdir=tmp/
 fi
 
-if [[ $1 == "-q" ]]; then
+if [ $1 = "-q" ]; then
   short="y"
   shift
 else
@@ -24,8 +24,8 @@ right="$4"
 fragmap $first $last "$left" > "$cmpdir/left.txt"
 fragmap $first $last "$right" > "$cmpdir/right.txt"
 
-if [[ $short == "y" ]]; then
-  samemsg="== $left $right"
+if [ $short = "y" ]; then
+  samemsg="= $left $right"
   diffmsg="<> $left $right"
 else
   samemsg="$left and $right are identical."

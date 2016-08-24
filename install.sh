@@ -1,18 +1,18 @@
 #!/bin/bash
 
-BASHWF="${HOME}/bashwf"
-BASHWF_SYS="$BASHWF/system"
-BASHWF_USER="$BASHWF/user"
+export BASHWF="${HOME}/bashwf"
+export BASHWF_SYS="$BASHWF/system"
+export BASHWF_USER="$BASHWF/user"
 
-source utils.sh
-source setup.sh
+. utils.sh
+. setup.sh
 
 cd src/
 
 echo_info "$name"
 
 if check_requirements; then
-  setup;
+  setup
 else
   echo_warn "Error installing $name: Requirements not met"
 fi
@@ -26,6 +26,6 @@ Just insert it into whatever .profile/.bashrc/etc bash init file you use.
 
 function wf()
 {
-  source \${HOME}/bashwf/bashwf
+  . \${HOME}/bashwf/bashwf
 }
 "

@@ -1,26 +1,26 @@
 #!/bin/bash
 
-function command_exists()
+command_exists()
 {
     hash "$1" 2>/dev/null
     return $?
 }
 
-function askyesno()
+askyesno()
 {
     local QUESTION=$1
     local ANSWER
 
-    echo -n "$QUESTION [yes|no] "
+    printf "%s [yes|no] " $QUESTION
     read ANSWER
-    if [[ $ANSWER == 'yes' || $ANSWER == 'y' ]]; then
+    if [ $ANSWER = 'yes' -o $ANSWER = 'y' ]; then
         return 0
     else
         return 1
     fi
 }
 
-function try_source_path()
+try_source_path()
 {
     RELPATH="$1"
     EXTENSION="$2"
@@ -28,14 +28,14 @@ function try_source_path()
     SYS_MODULE_PATH="$BASHWF_SYS/${RELPATH}"
 
     # Load our bashrc modules if they exist
-    if [[ -d "$SYS_MODULE_PATH" ]]; then
+    if [ -d "$SYS_MODULE_PATH" ]; then
 
         for MODULE in $SYS_MODULE_PATH/*.$EXTENSION
         do
             MODULE_NAME=${MODULE##*/}
             MODULE_NAME=${MODULE_NAME%.*}
-            echo -n "$MODULE_NAME: "
-            source $MODULE
+            printf "%s: " $MODULE_NAME
+            . $MODULE
         done
 
     fi
@@ -43,14 +43,14 @@ function try_source_path()
     USER_MODULE_PATH="$BASHWF_USER/${RELPATH}"
 
     # Load our bashrc modules if they exist
-    if [[ -d "$USER_MODULE_PATH" ]]; then
+    if [ -d "$USER_MODULE_PATH" ]; then
 
         for MODULE in $USER_MODULE_PATH/*.$EXTENSION
         do
             MODULE_NAME=${MODULE##*/}
             MODULE_NAME=${MODULE_NAME%.*}
-            echo -n "$MODULE_NAME: "
-            source $MODULE
+            printf "%s: " $MODULE_NAME
+            . $MODULE
         done
 
     fi

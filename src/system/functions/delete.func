@@ -1,19 +1,19 @@
 #!/bin/bash
 
 
-function del()
+del()
 {
   local file="$1"
 
-  if [[ -z "$1" ]]; then
+  if [ -z "$1" ]; then
     cat <<EOF
 EOF
     return 1
   fi
 
-  if [[ -d "$file" ]]; then
+  if [ -d "$file" ]; then
     rm -rf "$file"
-  elif [[ -w "$file" ]]; then
+  elif [ -w "$file" ]; then
     rm -f "$file"
   else
     echo "$(basename $file) is not writable."

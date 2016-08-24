@@ -1,6 +1,6 @@
 #!/bin/bash
 
-if [[ $1 == "-q" ]]; then
+if [ $1 = "-q" ]; then
   short="y"
   shift
 else
@@ -12,14 +12,13 @@ last=$2
 
 shift
 shift
-files=$@
 
-for left in $files; do
-  for right in $files; do
-    if [[ $left == $right ]]; then
+for left in "$@"; do
+  for right in "$@"; do
+    if [ $left = $right ]; then
       continue;
     fi
-    if [[ $short == "y" ]]; then
+    if [ $short = "y" ]; then
       fragdiff -q $first $last "$left" "$right"
     else
       fragdiff $first $last "$left" "$right"

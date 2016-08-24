@@ -1,6 +1,6 @@
 #!/bin/bash
 
-function sshmysql()
+sshmysql()
 {
   local PORT=3306
 

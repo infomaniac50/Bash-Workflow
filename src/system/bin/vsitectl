@@ -7,9 +7,9 @@ ENABLED="/etc/nginx/sites-enabled"
 ACTION="$1"
 SITE="$2"
 
-function enable_site()
+enable_site()
 {
-  if [[ ! -f "$ENABLED/$1.conf" ]]; then
+  if [ ! -f "$ENABLED/$1.conf" ]; then
     ln -s "$AVAILABLE/$1.conf" "$ENABLED/$1.conf"
     echo "Site $1 enabled."
     systemctl reload nginx
@@ -18,9 +18,9 @@ function enable_site()
   fi
 }
 
-function disable_site()
+disable_site()
 {
-  if [[ -f "$ENABLED/$1.conf" ]]; then
+  if [ -f "$ENABLED/$1.conf" ]; then
     rm "$ENABLED/$1.conf"
     echo "Site $1 disabled."
     systemctl reload nginx
@@ -29,7 +29,7 @@ function disable_site()
   fi
 }
 
-function usage()
+usage()
 {
   me=`basename $0`
   echo "Usage $me <[enable|disable]> <site>"

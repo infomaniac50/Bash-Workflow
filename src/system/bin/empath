@@ -3,12 +3,12 @@
 ACTION="$1"
 PATHOPT="$2"
 
-function valid() {
+valid() {
     local N=0
     local PATHVAR
     local PATHDIR
 
-    if [[ -f ${HOME}/.bash_path.opt ]]; then
+    if [ -f ${HOME}/.bash_path.opt ]; then
         while read PATHLINE
         do
             N=$((N+1))
@@ -16,10 +16,10 @@ function valid() {
             PATHVAR=$(echo "$PATHLINE" | cut -f 1 -d ' ' | tr -s ' ')
             PATHDIR=$(echo "$PATHLINE" | cut -f 2 -d ' ' | tr -s ' ')
 
-            if [[ -n $PATHOPT && $PATHOPT == $PATHVAR ]]; then
+            if [ -n $PATHOPT -a $PATHOPT = $PATHVAR ]; then
                 BASHPATH=$(eval echo $PATHDIR)
 
-                if [[ ! -d $BASHPATH ]]; then
+                if [ ! -d $BASHPATH ]; then
                     echo "Warning: The path $BASHPATH was not found in the filesystem."
                     return 1
                 fi

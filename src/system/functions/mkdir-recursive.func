@@ -1,6 +1,6 @@
 #!/bin/bash
 
-function mkdir-recursive()
+mkdir-recursive()
 {
     DIRECTORY="$1"
 

@@ -2,11 +2,11 @@
 PATHFILE=$BASHWF/paths/global.txt
 NEWPATH=""
 
-if [[ -f $PATHFILE ]]; then
+if [ -f $PATHFILE ]; then
     while read DIR
     do
         DIR=$(eval echo $DIR)
-        if [[ -d $DIR ]]
+        if [ -d $DIR ]
         then
             NEWPATH="$NEWPATH$DIR:"
         fi

@@ -2,19 +2,19 @@
 
 config="${HOME}/.bwf-workspace"
 
-function usage()
+usage()
 {
   echo "Workspace Switcher"
 }
 
-function switch()
+switch()
 {
   if exists $1; then
     echo cd $$1
   fi
 }
 
-function add()
+add()
 {
   if ! exists $1; then
     local key=$1
@@ -23,14 +23,14 @@ function add()
   fi
 }
 
-function remove()
+remove()
 {
   local key="$1"
 
   touch "$config.rm"
 
   while read $line; do
-    if [[ $line != $key* ]]; then
+    if [ $line != $key* ]; then
       echo "$line" >> "$config.rm"
     fi
   done < $config
@@ -38,19 +38,19 @@ function remove()
 
 }
 
-function exists()
+exists()
 {
-  return [[ -n $1 ]];
+  return [ -n $1 ];
 }
 
-function setup()
+setup()
 {
-  if [[ ! -f $config ]]; then
+  if [ ! -f $config ]; then
     touch $config
   fi
 }
 
-function workspace()
+workspace()
 {
   case $1 in
     'cd' )

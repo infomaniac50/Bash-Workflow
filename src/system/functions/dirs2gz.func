@@ -1,10 +1,13 @@
 #!/bin/bash
-function dirs2gz()
+dirs2gz()
 {
-    while read DIR; do echo ${DIR%/} && tar -czf ${DIR%/}.tar.gz $DIR; done < <(ls -d */)
+    while read DIR;
+    do
+      echo ${DIR%/} && tar -czf ${DIR%/}.tar.gz $DIR;
+    done < <(ls -d */)
 }
 
-function dirs2xz()
+dirs2xz()
 {
     while read DIR; do echo ${DIR%/} && tar -cJf ${DIR%/}.tar.xz $DIR; done < <(ls -d */)
 }

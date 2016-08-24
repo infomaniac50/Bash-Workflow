@@ -10,18 +10,18 @@ color_prompt=no
 pretty_terminal_list="cygwin xterm xterm-color"
 
 for terminal in $pretty_terminal_list; do
-  if [[ $TERM == $terminal ]]; then
+  if [ $TERM = "$terminal" ]; then
     color_prompt=yes
   fi
 done
 
-if [[ -n $FORCE_COLOR_WORKFLOW && $FORCE_COLOR_WORKFLOW == "TRUE" ]]; then
+if [ -n $FORCE_COLOR_WORKFLOW -a $FORCE_COLOR_WORKFLOW = "TRUE" ]; then
   color_prompt=yes
   unset FORCE_COLOR_WORKFLOW;
 fi
 
-if [[ $color_prompt == "yes" ]]; then
-  source "$BASHWF_SYS/colors.sh"
+if [ $color_prompt = "yes" ]; then
+  . "$BASHWF_SYS/colors.sh"
 else
-  source "$BASHWF_SYS/nocolors.sh"
+  . "$BASHWF_SYS/nocolors.sh"
 fi

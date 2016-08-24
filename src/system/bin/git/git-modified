@@ -2,7 +2,7 @@
 
 GITSTATUSTMP='/tmp/git.status'
 
-function usage()
+usage()
 {
     echo ""
     echo "Show status for all git repositories in the current directory."
@@ -22,11 +22,11 @@ function usage()
     echo "         -d | --dirty-only"
 }
 
-function program_head() {
+program_head() {
     echo "#########################################"
-}    
+}
 
-function version() {
+version() {
     program_head
 
     echo "# Author: Derek Chafin                  #"
@@ -38,13 +38,13 @@ function version() {
     program_head
 }
 
-function status() {
-    for DIR in $(ls -1dc -- */)
+status() {
+    for DIR in */
     do
-        cd "$DIR"
+        cd "$DIR" || continue
 
         # Make sure current directory is a git repo
-        if [[ -d ".git" ]]; then
+        if [ -d ".git" ]; then
             git status > $GITSTATUSTMP
             echo ""
             echo "$DIR"
@@ -55,7 +55,7 @@ function status() {
     done
 }
 
-function list() {
+list() {
     FILTER="$1"
     ZERO=0
 
@@ -75,28 +75,28 @@ function list() {
     esac
 
 
-    for DIR in $(ls -1dc -- */)
+    for DIR in */
     do
-        cd "$DIR"
+        cd "$DIR" || continue
 
         # Make sure current directory is a git repo
-        if [[ -d ".git" ]]; then
+        if [ -d ".git" ]; then
             git status > $GITSTATUSTMP
 
             echo ""
-            
-            if $(cat $GITSTATUSTMP | grep -q 'nothing to commit')
+
+            if cat $GITSTATUSTMP | grep -q 'nothing to commit'
             then
-                if [[ ! $CO -eq $ZERO ]]; then
+                if [ ! $CO -eq $ZERO ]; then
                     echo "$DIR is clean"
-                    if $(cat $GITSTATUSTMP | egrep -q 'ahead|push')
+                    if cat $GITSTATUSTMP | egrep -q 'ahead|push'
                     then
                         echo -en '\E[31;40m'"Warning: $DIR has un-pushed commits."
                         echo -e '\E[0m'
                     fi
                 fi
             else
-                if [[ ! $DO -eq $ZERO ]]; then
+                if [ ! $DO -eq $ZERO ]; then
                     echo "$DIR is dirty"
                 fi
             fi
@@ -115,16 +115,16 @@ IFS=$(echo -en "\n\b")
 
 case "$ACTION" in
     status)
-        status $@
+        status "$@"
         ;;
     list)
-        list $@
+        list "$@"
         ;;
     -v | --version)
-        version $@
+        version "$@"
         ;;
     -h | --help | *)
-        usage $@
+        usage "$@"
         ;;
 esac
 

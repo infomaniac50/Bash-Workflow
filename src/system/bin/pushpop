@@ -97,7 +97,7 @@ var doStack = function (exists) {
     }
 };
 
-if (action == 'debug') {
+if (action = 'debug') {
     console.log(tmpfile);
     console.log(action);
     console.log(value);

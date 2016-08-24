@@ -8,9 +8,15 @@ txtblu='\e[0;34m'       # blue
 txtrst='\e[0m'          # Text reset
 
 # Feedback indicators
-function echo_info() { echo -e "${txtblu}$*${txtrst}"; }
-function echo_pass() { echo -e "${txtgrn}$*${txtrst}"; }
-function echo_warn() { echo -e "${txtylw}$*${txtrst}"; }
+echo_info() {
+  echo -e "${txtblu}$*${txtrst}";
+}
+echo_pass() {
+  echo -e "${txtgrn}$*${txtrst}";
+}
+echo_warn() {
+  echo -e "${txtylw}$*${txtrst}";
+}
 
 function cp_rename()
 {

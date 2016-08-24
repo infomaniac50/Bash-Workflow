@@ -3,13 +3,13 @@
 
 
 # searching functions
-function find_in_ancestor
+find_in_ancestor()
 {
   local find_what="$1"
   local starting_directory="$PWD"
 
-  while [[ "$PWD" != "/" ]] ; do
-      if [[ -f "$find_what" ]]; then
+  while [ "$PWD" != "/" ] ; do
+      if [ -f "$find_what" ]; then
         found_in_ancestor="$PWD/$find_what"
         break
       fi
@@ -19,7 +19,7 @@ function find_in_ancestor
   # Clean up
   cd $starting_directory
 
-  if [[ -z $found_in_ancestor ]]; then
+  if [ -z $found_in_ancestor ]; then
     return 1
   else
     return 0
@@ -27,7 +27,7 @@ function find_in_ancestor
 }
 
 # date and time functions
-function stamp() { date +"%s"; }
+stamp() { date +"%s"; }
 
 # rsync functions
-function arsync() { rsync -rlpPsthiD --stats "$@"; }
+arsync() { rsync --recursive --links --perms --devices --specials --times --protect-args --human-readable --partial --progress --itemize-changes --stats "$@"; }

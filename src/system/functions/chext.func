@@ -1,9 +1,9 @@
 #!/bin/bash
 
 # http://www.commandlinefu.com/commands/view/7260/batch-rename-extension-of-all-files-in-a-folder-in-the-example-from-.txt-to-.md
-function chext ()
+chext ()
 {
-  if [[ $1 == '-n' ]]; then
+  if [ $1 = '-n' ]; then
     shift
     for f in *.$1;
     do

@@ -16,7 +16,7 @@ if command_exists docker; then
   dkrn() { for image in $(docker images | awk '{ print $1, $3 }' | grep '<none>' | cut -f2 -d ' '); do docker rmi $image; done; }
   dksh()
   {
-    if [[ -z $1 ]]; then
+    if [ -z $1 ]; then
       echo "You didn't specify a container."
       return 1
     else

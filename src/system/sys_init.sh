@@ -1,6 +1,6 @@
 #!/bin/bash
 
-source "${BASHWF_SYS}/config.sh"
-source "${BASHWF_SYS}/utils.sh"
-source "${BASHWF_SYS}/init_unicode.sh"
-source "${BASHWF_SYS}/init_colors.sh"
+. "${BASHWF_SYS}/config.sh"
+. "${BASHWF_SYS}/utils.sh"
+. "${BASHWF_SYS}/init_unicode.sh"
+. "${BASHWF_SYS}/init_colors.sh"

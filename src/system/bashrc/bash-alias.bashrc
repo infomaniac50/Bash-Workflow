@@ -1,13 +1,28 @@
 #!/bin/bash
 
-if [[ $OSTYPE != "msys" ]]; then
+if [ -z $OSTYPE ]; then
+
+if [ "$(uname)" = "Darwin" ]; then
+  # Do something under Mac OS X platform
+    OSTYPE="darwin";
+elif [ "$(expr substr $(uname -s) 1 5)" = "Linux" ]; then
+    # Do something under GNU/Linux platform
+    OSTYPE="linux-gnu"
+elif [ "$(expr substr $(uname -s) 1 10)" = "MINGW32_NT" ]; then
+    # Do something under Windows NT platform
+    OSTYPE="msys"
+fi
+
+fi
+
+if [ $OSTYPE != "msys" ]; then
     # Don't alias this on Windows as it causes problems with the native ping.
     alias fastping='ping -c 100 -i .2'
     alias ping='ping -c 5'
 fi
 
 # Mac check
-if [[ $OSTYPE == darwin* ]]; then
+if [ $OSTYPE = darwin* ]; then
   # BSD uses environment variables
   export CLICOLOR=1
   export LSCOLORS="gxfxcxdxbxegedabagacad"
@@ -37,7 +52,7 @@ alias now='date +"%T"'
 alias stamp='date +"%s"'
 
 # Archival rsync
-alias arsync='rsync -rlpPsthiD --stats'
+alias arsync='rsync --recursive --links --perms --devices --specials --times --protect-args --human-readable --partial --progress --itemize-changes --stats'
 
 # Sublimish reveal command
 # Mostly used like reveal ./; # This opens the current directory in the file browser

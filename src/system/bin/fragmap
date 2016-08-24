@@ -4,7 +4,7 @@ first=$1
 last=$2
 file="$3"
 
-if [[ -f "$file" ]]; then
+if [ -f "$file" ]; then
   let "lastoff = $last - $first"
   cat "$file" | tail -n+$first | head -n$lastoff
 else

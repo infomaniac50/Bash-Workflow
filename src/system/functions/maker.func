@@ -1,6 +1,6 @@
 #!/bin/bash
 
-function maker()
+maker()
 {
     PATHFILE="$BASHWF/paths/$1.txt"
 

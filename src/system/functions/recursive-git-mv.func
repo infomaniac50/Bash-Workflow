@@ -1,6 +1,6 @@
 #!/bin/bash
 
-function recursive-git-mv()
+recursive-git-mv()
 {
     FILENAME="$1"
     SUBDIR="$2"

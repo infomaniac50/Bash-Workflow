@@ -1,6 +1,6 @@
 #!/bin/bash
 
-function license()
+license()
 {
   local LICENSE
   local VERSION
