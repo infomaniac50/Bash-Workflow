@@ -9,9 +9,9 @@ txtblu='\e[0;34m'       # blue
 txtrst='\e[0m'          # Text reset
 
 # Feedback indicators
-function echo_info() { echo -e "${txtblu}$*${txtrst}"; }
-function echo_pass() { echo -e "${txtgrn}$*${txtrst}"; }
-function echo_fail() { echo -e "${txtred}$*${txtrst}"; }
+function echo_info() { printf "${txtblu}%s${txtrst}\n" "$*"; }
+function echo_pass() { printf "${txtgrn}%s${txtrst}\n" "$*"; }
+function echo_fail() { printf "${txtred}%s${txtrst}\n" "$*"; }
 
 # echo always returns success
 status=0

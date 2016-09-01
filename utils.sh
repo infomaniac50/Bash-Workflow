@@ -9,13 +9,13 @@ txtrst='\e[0m'          # Text reset
 
 # Feedback indicators
 echo_info() {
-  echo -e "${txtblu}$*${txtrst}";
+  printf "${txtblu}%s${txtrst}\n" "$*";
 }
 echo_pass() {
-  echo -e "${txtgrn}$*${txtrst}";
+  printf "${txtgrn}%s${txtrst}\n" "$*";
 }
 echo_warn() {
-  echo -e "${txtylw}$*${txtrst}";
+  printf "${txtylw}%s${txtrst}\n" "$*";
 }
 
 function cp_rename()
