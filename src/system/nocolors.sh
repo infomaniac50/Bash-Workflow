@@ -28,20 +28,20 @@ export warn="${bldylw}!${txtrst}"
 # Feedback indicators
 echo_info()
 {
-  echo -e "$*"
+  printf "%s\n" "$*"
 }
 
 echo_pass()
 {
-  echo -e "$*"
+  printf "%s\n" "$*"
 }
 
 echo_fail()
 {
-  echo -e "$*"
+  printf "%s\n" "$*"
 }
 
 echo_warn()
 {
-  echo -e "$*"
+  printf "%s\n" "$*"
 }

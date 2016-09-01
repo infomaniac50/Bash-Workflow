@@ -29,20 +29,20 @@ export txtrst='\e[0m'          # Text reset
 # Feedback indicators
 echo_info()
 {
-  echo -e "${bldcyn}$*${txtrst}"
+  printf "${bldcyn}%s${txtrst}\n" "$*"
 }
 
 echo_pass()
 {
-  echo -e "${bldblu}$*${txtrst}"
+  printf "${bldblu}%s${txtrst}\n" "$*"
 }
 
 echo_fail()
 {
-  echo -e "${bldred}$*${txtrst}"
+  printf "${bldred}%s${txtrst}\n" "$*"
 }
 
 echo_warn()
 {
-  echo -e "${bldylw}$*${txtrst}"
+  printf "${bldylw}%s${txtrst}\n" "$*"
 }
