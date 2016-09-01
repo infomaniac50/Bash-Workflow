@@ -15,14 +15,15 @@ fi
 
 fi
 
-if [ $OSTYPE != "msys" ]; then
+bashos=$(echo $OSTYPE | sed s/darwin.*/darwin/)
+if [ $bashos != "msys" ]; then
     # Don't alias this on Windows as it causes problems with the native ping.
     alias fastping='ping -c 100 -i .2'
     alias ping='ping -c 5'
 fi
 
 # Mac check
-if [ $OSTYPE = darwin* ]; then
+if [ $bashos = "darwin" ]; then
   # BSD uses environment variables
   export CLICOLOR=1
   export LSCOLORS="gxfxcxdxbxegedabagacad"
