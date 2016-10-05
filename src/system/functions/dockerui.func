@@ -22,7 +22,7 @@ dockerui()
       ;;
     stop )
       docker stop dockerui-container
-      docker rm dockerui-container
+      docker rm --volumes dockerui-container
       ;;
   esac
 }
