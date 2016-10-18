@@ -5,19 +5,20 @@ config_example()
 {
   cat <<EOF
 #!/bin/bash
-# .coder.sample
 
 # Keep the trailing slashes consistent
 # if you want rsync to upload to the right place.
 
 # Extra rsync arguments
-# extra_=""
+# if find_in_ancestor "rsync-exclude.txt"; then
+    # export extra_=--exclude-from="$found_in_ancestor"
 
-# Local Project Directory
-local_='src/'
+    # Local Project Directory
+    export local_='src/'
 
-# Remote Project Directory
-remote_='user@example.com:/home/user/public_html/'
+    # Remote Project Directory
+    export remote_='<username>@<host>:public_html/'
+# fi
 EOF
 
 }
@@ -125,7 +126,7 @@ main()
       arsync "$local_" "$remote_" $extra_ "$@"
       ;;
     "fix_perms" )
-      find "$local_" -type d -exec chmod 755 '{}' \;
+      find "$local_" -type d -not -wholename "$local_" -exec chmod 755 '{}' \;
       find "$local_" -type f -exec chmod 644 '{}' \;
       ;;
     "archive" )
