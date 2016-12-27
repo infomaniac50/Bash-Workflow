@@ -1,7 +1,7 @@
 #!/bin/bash
 
 
-dockerui()
+portainer()
 {
   if [[ -n $1 ]]; then
     action="$1"
@@ -10,19 +10,19 @@ dockerui()
   fi
 
   if [[ $action != "stop" ]]; then
-    docker pull uifd/ui-for-docker
+    docker pull portainer/portainer
   fi
 
   case $action in
     run )
-      docker run --name dockerui-container --rm -p 9000:9000 --privileged -v /var/run/docker.sock:/var/run/docker.sock uifd/ui-for-docker
+      docker run --name portainer --rm -p 9000:9000 --privileged -v /var/run/docker.sock:/var/run/docker.sock portainer/portainer
       ;;
     start )
-      docker run -d --name dockerui-container -p 9000:9000 --privileged -v /var/run/docker.sock:/var/run/docker.sock uifd/ui-for-docker
+      docker run -d --name portainer -p 9000:9000 --privileged -v /var/run/docker.sock:/var/run/docker.sock portainer/portainer
       ;;
     stop )
-      docker stop dockerui-container
-      docker rm --volumes dockerui-container
+      docker stop portainer
+      docker rm --volumes portainer
       ;;
   esac
 }
