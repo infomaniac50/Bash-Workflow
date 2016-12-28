@@ -15,7 +15,7 @@ if command_exists docker; then
   # Remove all untagged images
   function dkrn ()
   {
-      for image in $(docker images | awk '{ print $1, $2, $3 }' | grep '<none>' | cut -f3 -d ' ');
+      for image in $(docker images | grep '<none>' | tr -s ' ' | cut -f3 -d ' ');
       do
           docker rmi $image;
       done
