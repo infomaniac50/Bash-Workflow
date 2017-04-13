@@ -35,7 +35,7 @@ function setup()
   echo ""
   for folder in $folder_list; do
     echo_info "Recursively copying system directory $folder"
-    cp -ar $folder $BASHWF_SYS/
+    cp -a $folder $BASHWF_SYS/
   done
 
   echo ""

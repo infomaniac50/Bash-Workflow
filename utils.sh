@@ -39,7 +39,7 @@ function cp_folder()
     mkdir $BASHWF/$1
   fi
 
-  cp -R $1/* $BASHWF/$1/
+  cp -a $1/* $BASHWF/$1/
 }
 
 function command_exists ()
